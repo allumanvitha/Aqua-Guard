@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.AquaGuard" parent="android:Theme.Material.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">#0b1218</item>
+        <item name="android:navigationBarColor">#0b1218</item>
+    </style>
+
+    <!-- Splash Screen Starting Theme -->
+    <style name="Theme.AquaGuard.Starting" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@drawable/ic_launcher_background</item>
+        <item name="android:statusBarColor">#0b1218</item>
+        <item name="android:navigationBarColor">#0b1218</item>
+    </style>
+</resources>
