@@ -3,6 +3,10 @@
 **/build/
 local.properties
 
+# Maven files
+target/
+**/target/
+
 # Android build outputs
 *.apk
 *.aar
