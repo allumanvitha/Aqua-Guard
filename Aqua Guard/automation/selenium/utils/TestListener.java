@@ -39,7 +39,7 @@ public class TestListener implements ITestListener {
         String feature = getFeature(result);
         String priority = getPriority(result);
         
-        ReportHelper.addResult("selenium", testId, module, feature, priority, "QA-Staging", "Chrome",
+        ReportHelper.addResult("Selenium", testId, module, feature, priority, "QA-Staging", "Chrome",
                 "Action should succeed", "Action succeeded successfully", "PASS", "N/A", duration, "Completed successfully");
     }
 
@@ -58,16 +58,17 @@ public class TestListener implements ITestListener {
         if (driver != null) {
             try {
                 File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                screenshotPath = "automation/selenium/reports/screenshots/" + testId + "_fail.png";
-                Files.createDirectories(Paths.get("automation/selenium/reports/screenshots/"));
-                Files.copy(srcFile.toPath(), Paths.get(screenshotPath), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-                log.info("Screenshot saved at: " + screenshotPath);
+                String fileLoc = "automation/reports/screenshots/" + testId + "_fail.png";
+                Files.createDirectories(Paths.get("automation/reports/screenshots/"));
+                Files.copy(srcFile.toPath(), Paths.get(fileLoc), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                screenshotPath = "screenshots/" + testId + "_fail.png";
+                log.info("Screenshot saved at: " + fileLoc);
             } catch (IOException e) {
                 log.error("Failed to capture screenshot: " + e.getMessage());
             }
         }
 
-        ReportHelper.addResult("selenium", testId, module, feature, priority, "QA-Staging", "Chrome",
+        ReportHelper.addResult("Selenium", testId, module, feature, priority, "QA-Staging", "Chrome",
                 "Action should succeed", "Failed: " + result.getThrowable().getMessage(), "FAIL", screenshotPath, duration, result.getThrowable().getMessage());
     }
 
@@ -79,7 +80,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onFinish(ITestContext context) {
         log.info("Finished Test Suite execution: " + context.getName());
-        ReportHelper.generateReports("selenium");
+        ReportHelper.saveAndGenerateUnifiedReport("selenium");
     }
 
     private String getTestId(ITestResult result) {

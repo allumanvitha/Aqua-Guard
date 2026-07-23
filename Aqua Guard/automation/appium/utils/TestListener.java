@@ -40,7 +40,7 @@ public class TestListener implements ITestListener {
         String feature = getFeature(result);
         String priority = getPriority(result);
         
-        ReportHelper.addResult("appium", testId, module, feature, priority, "Mobile-QA-Staging", "Android Emulator",
+        ReportHelper.addResult("Appium", testId, module, feature, priority, "Mobile-QA-Staging", "Android Emulator",
                 "Action should succeed", "Action succeeded successfully", "PASS", "N/A", duration, "Completed successfully");
     }
 
@@ -59,16 +59,17 @@ public class TestListener implements ITestListener {
         if (driver != null) {
             try {
                 File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                screenshotPath = "automation/appium/reports/screenshots/" + testId + "_fail.png";
-                Files.createDirectories(Paths.get("automation/appium/reports/screenshots/"));
-                Files.copy(srcFile.toPath(), Paths.get(screenshotPath), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-                log.info("Mobile Screenshot saved at: " + screenshotPath);
+                String fileLoc = "automation/reports/screenshots/" + testId + "_fail.png";
+                Files.createDirectories(Paths.get("automation/reports/screenshots/"));
+                Files.copy(srcFile.toPath(), Paths.get(fileLoc), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                screenshotPath = "screenshots/" + testId + "_fail.png";
+                log.info("Mobile Screenshot saved at: " + fileLoc);
             } catch (IOException e) {
                 log.error("Failed to capture mobile screenshot: " + e.getMessage());
             }
         }
 
-        ReportHelper.addResult("appium", testId, module, feature, priority, "Mobile-QA-Staging", "Android Emulator",
+        ReportHelper.addResult("Appium", testId, module, feature, priority, "Mobile-QA-Staging", "Android Emulator",
                 "Action should succeed", "Failed: " + result.getThrowable().getMessage(), "FAIL", screenshotPath, duration, result.getThrowable().getMessage());
     }
 
@@ -80,7 +81,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onFinish(ITestContext context) {
         log.info("Finished Mobile Test Suite execution: " + context.getName());
-        ReportHelper.generateReports("appium");
+        ReportHelper.saveAndGenerateUnifiedReport("appium");
     }
 
     private String getTestId(ITestResult result) {

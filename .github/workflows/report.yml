@@ -69,52 +69,9 @@ jobs:
       - name: Prepare GH-Pages Directory structure
         run: |
           mkdir -p public-reports
-          mkdir -p public-reports/selenium
-          mkdir -p public-reports/appium
-          
-          # Copy Selenium reports if they exist
-          if [ -d "Aqua Guard/automation/selenium/reports" ]; then
-            cp -r "Aqua Guard/automation/selenium/reports/"* public-reports/selenium/
+          if [ -d "Aqua Guard/automation/reports" ]; then
+            cp -r "Aqua Guard/automation/reports/"* public-reports/
           fi
-          
-          # Copy Appium reports if they exist
-          if [ -d "Aqua Guard/automation/appium/reports" ]; then
-            cp -r "Aqua Guard/automation/appium/reports/"* public-reports/appium/
-          fi
-          
-          # Create HTML dashboard index
-          cat << 'EOF' > public-reports/index.html
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-              <meta charset="UTF-8">
-              <title>Aqua Guard QA Automation Hub</title>
-              <style>
-                  body { font-family: 'Inter', sans-serif; background-color: #0b1218; color: #ffffff; text-align: center; padding: 50px; }
-                  h1 { color: #2196f3; }
-                  .container { display: flex; justify-content: center; gap: 40px; margin-top: 50px; }
-                  .card { background: #121e2d; padding: 40px; border-radius: 12px; width: 300px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); text-decoration: none; color: white; border: 1px solid #1fffffff; transition: transform 0.2s; }
-                  .card:hover { transform: scale(1.05); border-color: #2196f3; }
-                  .card h2 { color: #2196f3; margin-top: 0; }
-                  .card p { color: #80ffffff; font-size: 14px; }
-              </style>
-          </head>
-          <body>
-              <h1>Aqua Guard QA Automation Framework Reports</h1>
-              <p>Select a test execution report dashboard below:</p>
-              <div class="container">
-                  <a class="card" href="selenium/TestReport.html">
-                      <h2>Selenium Web Reports</h2>
-                      <p>View Web dashboard, Firebase Console, and Reports tests results.</p>
-                  </a>
-                  <a class="card" href="appium/TestReport.html">
-                      <h2>Appium Mobile Reports</h2>
-                      <p>View Android native app E2E regression results.</p>
-                  </a>
-              </div>
-          </body>
-          </html>
-          EOF
 
       - name: Upload Report Directory Artifact
         uses: actions/upload-pages-artifact@v3
