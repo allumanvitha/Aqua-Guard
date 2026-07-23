@@ -24,6 +24,9 @@
             <class name="appium.tests.MonitoringAppiumTests" />
             <class name="appium.tests.SystemAppiumTests" />
             <class name="appium.tests.PerformanceAppiumTests" />
+    <test name="API Load Performance Tests">
+        <classes>
+            <class name="selenium.tests.PerformanceLoadTest" />
         </classes>
     </test>
 </suite>
