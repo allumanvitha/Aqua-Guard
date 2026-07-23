@@ -9,6 +9,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.lowagie.text.Document;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.Element;
+import com.lowagie.text.FontFactory;
+import java.awt.Color;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -104,6 +112,7 @@ public class ReportHelper {
             generateCSVReport(unifiedResults, reportDir + "TestReport.csv");
             generateJSONReport(unifiedResults, reportDir + "TestReport.json");
             generateXMLReport(unifiedResults, reportDir + "TestReport.xml");
+            generatePDFReport(unifiedResults, reportDir + "TestReport.pdf");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -395,4 +404,87 @@ public class ReportHelper {
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         mapper.writeValue(new File(path), results);
     }
+
+    private static void generatePDFReport(List<TestResult> results, String path) {
+        Document document = new Document();
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream(path));
+            document.open();
+            
+            com.lowagie.text.Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, Color.BLUE);
+            Paragraph title = new Paragraph("Aqua Guard QA Test Execution Report", titleFont);
+            title.setAlignment(Element.ALIGN_CENTER);
+            title.setSpacingAfter(20);
+            document.add(title);
+            
+            int passCount = 0;
+            int failCount = 0;
+            for (TestResult r : results) {
+                if ("PASS".equalsIgnoreCase(r.status)) passCount++;
+                else failCount++;
+            }
+            
+            com.lowagie.text.Font normalFont = FontFactory.getFont(FontFactory.HELVETICA, 12, Color.BLACK);
+            document.add(new Paragraph("Execution Summary:", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14)));
+            document.add(new Paragraph("Total Tests: " + results.size(), normalFont));
+            document.add(new Paragraph("PASS: " + passCount, normalFont));
+            document.add(new Paragraph("FAIL: " + failCount, normalFont));
+            document.add(new Paragraph("Pass Rate: " + String.format("%.1f%%", ((double)passCount/results.size())*100), normalFont));
+            document.add(new Paragraph("\n"));
+            
+            PdfPTable table = new PdfPTable(6);
+            table.setWidthPercentage(100);
+            table.setWidths(new float[]{1.5f, 1f, 1.5f, 3.5f, 1f, 1.5f});
+            
+            com.lowagie.text.Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10, Color.WHITE);
+            PdfPCell cell = new PdfPCell(new Paragraph("Test ID", headerFont));
+            cell.setBackgroundColor(Color.DARK_GRAY);
+            table.addCell(cell);
+            
+            cell = new PdfPCell(new Paragraph("Type", headerFont));
+            cell.setBackgroundColor(Color.DARK_GRAY);
+            table.addCell(cell);
+            
+            cell = new PdfPCell(new Paragraph("Module", headerFont));
+            cell.setBackgroundColor(Color.DARK_GRAY);
+            table.addCell(cell);
+            
+            cell = new PdfPCell(new Paragraph("Feature", headerFont));
+            cell.setBackgroundColor(Color.DARK_GRAY);
+            table.addCell(cell);
+            
+            cell = new PdfPCell(new Paragraph("Status", headerFont));
+            cell.setBackgroundColor(Color.DARK_GRAY);
+            table.addCell(cell);
+            
+            cell = new PdfPCell(new Paragraph("Time (ms)", headerFont));
+            cell.setBackgroundColor(Color.DARK_GRAY);
+            table.addCell(cell);
+            
+            com.lowagie.text.Font cellFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Color.BLACK);
+            for (TestResult r : results) {
+                table.addCell(new Paragraph(r.testId, cellFont));
+                table.addCell(new Paragraph(r.type, cellFont));
+                table.addCell(new Paragraph(r.module, cellFont));
+                table.addCell(new Paragraph(r.feature, cellFont));
+                
+                PdfPCell statusCell = new PdfPCell(new Paragraph(r.status, cellFont));
+                if ("PASS".equalsIgnoreCase(r.status)) {
+                    statusCell.setBackgroundColor(Color.GREEN);
+                } else {
+                    statusCell.setBackgroundColor(Color.RED);
+                }
+                table.addCell(statusCell);
+                
+                table.addCell(new Paragraph(String.valueOf(r.executionTime), cellFont));
+            }
+            
+            document.add(table);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            document.close();
+        }
+    }
 }
+
