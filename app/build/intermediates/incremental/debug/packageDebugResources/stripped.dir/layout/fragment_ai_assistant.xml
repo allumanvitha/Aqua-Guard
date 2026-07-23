@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0b1218"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_ai_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aqua Guard AI Assistant"
+        android:textColor="#2196f3"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <!-- Back Button -->
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@android:drawable/ic_menu_revert"
+        app:tint="#2196f3"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toTopOf="@id/tv_ai_title"
+        app:layout_constraintBottom_toBottomOf="@id/tv_ai_title"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <!-- Messages Recyclerview -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_chat_messages"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/tv_ai_title"
+        app:layout_constraintBottom_toTopOf="@id/tv_typing_indicator"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:listitem="@layout/item_chat_message" />
+
+    <!-- Typing indicator -->
+    <TextView
+        android:id="@+id/tv_typing_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AI Assistant is typing..."
+        android:textColor="#80ffffff"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="gone"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/til_chat_input"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <!-- Chat input box -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_chat_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Type a message..."
+        android:textColorHint="#80ffffff"
+        app:boxStrokeColor="#2196f3"
+        app:hintTextColor="#2196f3"
+        app:boxStrokeWidth="2dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusBottomEnd="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_send_chat">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_chat_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Send Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_send_chat"
+        android:layout_width="64dp"
+        android:layout_height="56dp"
+        android:text="Send"
+        android:textColor="#ffffff"
+        android:backgroundTint="#2196f3"
+        android:textSize="11sp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/til_chat_input"
+        app:layout_constraintTop_toTopOf="@id/til_chat_input"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

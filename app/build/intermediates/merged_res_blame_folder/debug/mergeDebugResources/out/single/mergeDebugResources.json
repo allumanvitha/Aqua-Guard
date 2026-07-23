@@ -1,0 +1,154 @@
+[
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_devices.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_devices.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_analytics.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_analytics.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/drawable_circle_bg_status.xml.flat",
+        "source": "com.aquaguard.app-main-7:/drawable/circle_bg_status.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_forgot_password.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_forgot_password.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/drawable_ic_alerts.xml.flat",
+        "source": "com.aquaguard.app-main-7:/drawable/ic_alerts.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_main_shell.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_main_shell.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/drawable_chat_bubble_ai.xml.flat",
+        "source": "com.aquaguard.app-main-7:/drawable/chat_bubble_ai.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/drawable_ic_analytics.xml.flat",
+        "source": "com.aquaguard.app-main-7:/drawable/ic_analytics.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/navigation_nav_graph.xml.flat",
+        "source": "com.aquaguard.app-main-7:/navigation/nav_graph.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_register.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_register.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_item_chat_message.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/item_chat_message.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_item_forecast.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/item_forecast.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.aquaguard.app-main-7:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_item_alert.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/item_alert.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/color_chip_bg_colors.xml.flat",
+        "source": "com.aquaguard.app-main-7:/color/chip_bg_colors.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_dashboard.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_dashboard.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.aquaguard.app-main-7:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/drawable_ic_dashboard.xml.flat",
+        "source": "com.aquaguard.app-main-7:/drawable/ic_dashboard.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.aquaguard.app-main-7:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_activity_main.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_settings.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_settings.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.aquaguard.app-main-7:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_item_device.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/item_device.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/drawable_ic_profile.xml.flat",
+        "source": "com.aquaguard.app-main-7:/drawable/ic_profile.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/drawable_splash_glow_gradient.xml.flat",
+        "source": "com.aquaguard.app-main-7:/drawable/splash_glow_gradient.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_alerts.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_alerts.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_profile.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_ai_assistant.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_ai_assistant.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/drawable_ic_history.xml.flat",
+        "source": "com.aquaguard.app-main-7:/drawable/ic_history.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/menu_bottom_nav_menu.xml.flat",
+        "source": "com.aquaguard.app-main-7:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_item_valve_log.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/item_valve_log.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_history.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_history.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_login.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_login.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/drawable_chat_bubble_user.xml.flat",
+        "source": "com.aquaguard.app-main-7:/drawable/chat_bubble_user.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_onboarding.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_onboarding.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_item_device_chip.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/item_device_chip.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/color_bottom_nav_colors.xml.flat",
+        "source": "com.aquaguard.app-main-7:/color/bottom_nav_colors.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-debug-5:/layout_fragment_splash.xml.flat",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_splash.xml"
+    }
+]

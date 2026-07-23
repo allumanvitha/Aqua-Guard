@@ -1,0 +1,86 @@
+[
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_history.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_history.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_alerts.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_alerts.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_devices.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_devices.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_register.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_register.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/item_forecast.xml",
+        "source": "com.aquaguard.app-main-7:/layout/item_forecast.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_dashboard.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_dashboard.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/item_device_chip.xml",
+        "source": "com.aquaguard.app-main-7:/layout/item_device_chip.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/item_chat_message.xml",
+        "source": "com.aquaguard.app-main-7:/layout/item_chat_message.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_analytics.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_analytics.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_ai_assistant.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_ai_assistant.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_main_shell.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_main_shell.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_login.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_login.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/item_device.xml",
+        "source": "com.aquaguard.app-main-7:/layout/item_device.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_onboarding.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_onboarding.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/activity_main.xml",
+        "source": "com.aquaguard.app-main-7:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_splash.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_splash.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/item_alert.xml",
+        "source": "com.aquaguard.app-main-7:/layout/item_alert.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_settings.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_settings.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_forgot_password.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_forgot_password.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/fragment_profile.xml",
+        "source": "com.aquaguard.app-main-7:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "com.aquaguard.app-mergeDebugResources-4:/layout/item_valve_log.xml",
+        "source": "com.aquaguard.app-main-7:/layout/item_valve_log.xml"
+    }
+]

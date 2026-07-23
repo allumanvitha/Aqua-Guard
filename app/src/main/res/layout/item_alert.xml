@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="6dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="#121e2d"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <View
+            android:id="@+id/v_severity_indicator"
+            android:layout_width="8dp"
+            android:layout_height="48dp"
+            android:background="#d32f2f" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp">
+
+            <TextView
+                android:id="@+id/tv_alert_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LEAK DETECTED"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_alert_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="High flow rate recorded with zero demand."
+                android:textColor="#80ffffff"
+                android:textSize="13sp"
+                android:layout_marginTop="2dp" />
+
+            <TextView
+                android:id="@+id/tv_alert_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Just now"
+                android:textColor="#40ffffff"
+                android:textSize="10sp"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_resolve_alert"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resolve"
+            android:textColor="#2196f3"
+            app:strokeColor="#2196f3"
+            android:textSize="11sp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:layout_marginStart="12dp" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

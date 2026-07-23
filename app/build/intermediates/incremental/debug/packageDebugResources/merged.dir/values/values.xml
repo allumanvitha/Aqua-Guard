@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language_options">
+        <item>English</item>
+        <item>Spanish</item>
+        <item>Hindi</item>
+    </string-array>
+    <color name="black">#000000</color>
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+    <color name="white">#FFFFFF</color>
+    <string name="app_name">Aqua Guard</string>
+    <string name="gcm_defaultSenderId" translatable="false">1076225105111</string>
+    <string name="google_api_key" translatable="false">AIzaSyAhtfJJVg8_8B4riSaPNI4ErkZA9XbmYj0</string>
+    <string name="google_app_id" translatable="false">1:1076225105111:android:61b35779af366d205fe492</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAhtfJJVg8_8B4riSaPNI4ErkZA9XbmYj0</string>
+    <string name="google_storage_bucket" translatable="false">aquaguard-75596.firebasestorage.app</string>
+    <string name="project_id" translatable="false">aquaguard-75596</string>
+    <style name="Theme.AquaGuard" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+    </style>
+    <style name="Theme.AquaGuard.Starting" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/ic_launcher_background</item>
+    </style>
+</resources>
