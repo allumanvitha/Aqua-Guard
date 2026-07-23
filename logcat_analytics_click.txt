@@ -1,0 +1,103 @@
+--------- beginning of main
+07-22 23:29:40.189 12951 12951 I adbd    : adbd service requested 'shell,v2,TERM=xterm-256color,raw:input tap 324 2280'
+07-22 23:29:40.295  2265  3650 I InputDispatcher: injectInputEvent: targetUid=<not set>, syncMode=WAIT_FOR_FINISHED, timeout=30000ms, policyFlags=0x8000000, event=MotionEvent { action=DOWN, id[0]=0, x[0]=324, y[0]=2280, eventTime=196633333000000, downTime=196633333000000, deviceId=3, source=TOUCHSCREEN, displayId=0, eventId=0xd76c9c59}
+07-22 23:29:40.297  2265  3650 E InputDispatcher: Inconsistent event: MotionEvent { action=DOWN, id[0]=0, x[0]=324, y[0]=2280, eventTime=196633333000000, downTime=196633333000000, deviceId=3, source=TOUCHSCREEN, displayId=0, eventId=0xd76c9c59}, reason: Injection on 0: Invalid DOWN event - pointers already down for device DeviceId(-1): {DeviceId(-1): {1, 0}}
+07-22 23:29:40.300  2265  2547 I InputDispatcher: Dropping event because there is no touchable window at (324.0, 2280.0) on display 0.
+--------- beginning of system
+07-22 23:29:40.300  2265  3650 W InputManager: Input event injection from pid 32658 failed.
+07-22 23:29:40.301  2265  3650 I InputDispatcher: injectInputEvent: targetUid=<not set>, syncMode=WAIT_FOR_FINISHED, timeout=30000ms, policyFlags=0x8000000, event=MotionEvent { action=UP, id[0]=0, x[0]=324, y[0]=2280, eventTime=196633333000000, downTime=196633333000000, deviceId=3, source=TOUCHSCREEN, displayId=0, eventId=0xd48df1d4}
+07-22 23:29:40.301  2265  2409 D PowerManagerService: userActivityNoUpdateLocked: groupId=0, eventTime=196633333, event=touch, flags=0x0, uid=1000
+07-22 23:29:40.301  1401  2032 D VRR [OTI]: handleIdle from 1 to 0
+07-22 23:29:40.302  1401  2032 D VRR [OTI-HW]: isStateReady 0
+07-22 23:29:40.302  1401  2032 D VRR [OTI-HW]: rate range: min {id=0, hwcId=0, resolution=1080x2412, vsyncRate=60.00 Hz, dpi=391.89x395.26, group=0, vrrConfig=N/A} cur {id=0, hwcId=0, resolution=1080x2412, vsyncRate=60.00 Hz, dpi=391.89x395.26, group=0, vrrConfig=N/A} max {id=0, hwcId=0, resolution=1080x2412, vsyncRate=60.00 Hz, dpi=391.89x395.26, group=0, vrrConfig=N/A}
+07-22 23:29:40.302  1401  2032 D VRR [OTI-HW]: keep rate.
+07-22 23:29:40.302  1401  2006 D SurfaceFlinger: calculateTimeoutTime, triggerInterval = 2 sec + 999999307 nsec
+07-22 23:29:40.302  1323  1431 I libPowerHal: [perfLockAcq] idx:0 hdl:186275 hint:25 pid:1323 tid:1323 duration:10000 lock_user:vendor.mediatek => ret_hdl:186275
+07-22 23:29:40.302  1323  1431 I libPowerHal: [perfLockAcq] Done for hdl : 186275
+07-22 23:29:40.307  2265  3650 E InputDispatcher: Inconsistent event: MotionEvent { action=UP, id[0]=0, x[0]=324, y[0]=2280, eventTime=196633333000000, downTime=196633333000000, deviceId=3, source=TOUCHSCREEN, displayId=0, eventId=0xd48df1d4}, reason: Injection on 0: Got ACTION_UP, but we have pointers: {1, 0} for device DeviceId(-1)
+07-22 23:29:40.308  2265  3650 W InputManager: Input event injection from pid 32658 failed.
+07-22 23:29:40.308  1323  1431 I libPowerHal: [perfLockRel] hdl:186275, idx:0
+07-22 23:29:40.309  1323  1431 I libPowerHal: [perfScnUpdate] release powerhal handle 186275
+07-22 23:29:40.311  1323  1431 I libPowerHal: [perfLockRel] Done for hdl : 186275
+07-22 23:29:40.388  2265  3352 D AudioServiceExtImpl: oplusGetParameters() keyValuePairs:OPLUS_AUDIO_GET_FOCUS_STACK, uid: 1000
+07-22 23:29:40.388  2265  3352 I OplusHansManager : uid=10296, pkg=com.whatsapp F enter(), M stay=10
+07-22 23:29:40.399  2265  3352 I OplusHansManager : freeze uid: 10296 com.whatsapp pids: [16419] scene: LcdOn
+07-22 23:29:40.401  2265  3357 I OplusHansManager : p_BC uid=10296 pkg=com.whatsapp
+07-22 23:29:40.401  9031  9035 D IHansComunication: HANS sendMessageToKernel: threadId = 494705544304, netLinkSetup = 1, type = PKG, targetUid = 10296, pkgCmd = ADD_ONE_UID
+07-22 23:29:40.401  2265  3831 D OplusProxyWakeLock: check proxy worksource [ 10296] failed, reason:TAG_NULL ,tag: *job*
+07-22 23:29:40.401  2265  3357 I OplusCameraManagerGlobal: reportAppFreeze E
+07-22 23:29:40.403  2265  3357 I OplusBinderProxy: proxyBinder uid: 10296 pkg: com.whatsapp proxy: true calling: OFreezer
+07-22 23:29:40.410 16419 16419 D WM-SystemJobService: onStopJob for WorkGenerationalId(workSpecId=918d0b4d-b3cb-4efe-9d94-4327e7e1873e, generation=0)
+07-22 23:29:40.415 16419 16467 D WM-Processor: WorkerWrapper interrupted for 918d0b4d-b3cb-4efe-9d94-4327e7e1873e
+07-22 23:29:40.415 16419 16467 D WM-StopWorkRunnable: StopWorkRunnable for 918d0b4d-b3cb-4efe-9d94-4327e7e1873e; Processor.stopWork = true
+07-22 23:29:40.415  2265  3831 I OplusHansManager : unfreeze uid: 10296 com.whatsapp pids: [16419] reason: Wakelock scene: LcdOn
+07-22 23:29:40.415  2265  3352 I OplusHansManager : uid=10296, pkg=com.whatsapp F exit(), F stay=0, reason=Wakelock
+07-22 23:29:40.415  2265  3357 I OplusHansManager : up_BC uid=10296 pkg=com.whatsapp
+07-22 23:29:40.415  2265  3357 I OplusCameraManagerGlobal: reportAppFreeze E
+07-22 23:29:40.415  2265  3355 I OplusHansManager : forceUnfreezeApp uid= 10296 unfreezeForKernel: W_AsyncBinder false
+07-22 23:29:40.416   709  4073 I android.system.suspend-service: Last release wakelock name = PowerManagerService.WakeLocks
+07-22 23:29:40.416   709  4073 I android.system.suspend-service: mAutosuspendEnabled=1
+07-22 23:29:40.416  2265  3357 I OplusBinderProxy: proxyBinder uid: 10296 pkg: com.whatsapp proxy: false calling: OFreezer
+07-22 23:29:40.423 27572 28034 I eowa    : (REDACTED) HDM. appOpsListener %s %s
+07-22 23:29:40.423 16419 16487 I WM-WorkerWrapper: Work [ id=918d0b4d-b3cb-4efe-9d94-4327e7e1873e, tags={ com.whatsapp.infra.networking.xmpp.lifecycle.XmppLifecycleWorker } ] was cancelled
+07-22 23:29:40.423 16419 16487 I WM-WorkerWrapper: X.JD6
+07-22 23:29:40.423 16419 16487 I WM-WorkerWrapper: 	at X.GNB.A01(:6)
+07-22 23:29:40.423 16419 16487 I WM-WorkerWrapper: 	at X.J3C.run(:86)
+07-22 23:29:40.423 16419 16487 I WM-WorkerWrapper: 	at X.GKI.run(:2)
+07-22 23:29:40.423 16419 16487 I WM-WorkerWrapper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+07-22 23:29:40.423 16419 16487 I WM-WorkerWrapper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+07-22 23:29:40.423 16419 16487 I WM-WorkerWrapper: 	at java.lang.Thread.run(Thread.java:1572)
+07-22 23:29:40.423  1377  4324 V audio_utils::mutex: mutex_impl: audio_mutex initialized: ret:0  order:6
+07-22 23:29:40.423 27572 28034 I eowa    : (REDACTED) HDM. Ignoring irrelevant audio permission changes for package %s
+07-22 23:29:40.424   709  4073 I android.system.suspend-service: First holding wakelock name = ApmOutput
+07-22 23:29:40.425 16419 16487 D WM-WorkerWrapper: Status for 918d0b4d-b3cb-4efe-9d94-4327e7e1873e is RUNNING; not doing any work and rescheduling for later execution
+07-22 23:29:40.425   709  4073 I android.system.suspend-service: Last release wakelock name = ApmOutput
+07-22 23:29:40.426   709  4073 I android.system.suspend-service: mAutosuspendEnabled=1
+07-22 23:29:40.428  1377  4324 V audio_utils::mutex: mutex_impl: audio_mutex initialized: ret:0  order:6
+07-22 23:29:40.429  1284 26407 E TetherController: property_get sys.radio.data.modem_share_flag return 0, 1!
+07-22 23:29:40.429   709   709 I android.system.suspend-service: First holding wakelock name = ApmOutput
+07-22 23:29:40.431   709   709 I android.system.suspend-service: Last release wakelock name = ApmOutput
+07-22 23:29:40.431 16419 16419 D WM-Processor: GNB 918d0b4d-b3cb-4efe-9d94-4327e7e1873e executed; reschedule = true
+07-22 23:29:40.432   709   709 I android.system.suspend-service: mAutosuspendEnabled=1
+07-22 23:29:40.432 16419 16419 D WM-GreedyScheduler: Stopping tracking for WorkGenerationalId(workSpecId=918d0b4d-b3cb-4efe-9d94-4327e7e1873e, generation=0)
+07-22 23:29:40.433  1377  4324 V audio_utils::mutex: mutex_impl: audio_mutex initialized: ret:0  order:6
+07-22 23:29:40.433   709   709 I android.system.suspend-service: First holding wakelock name = ApmOutput
+07-22 23:29:40.434   709  4073 I android.system.suspend-service: Last release wakelock name = ApmOutput
+07-22 23:29:40.434   709  4073 I android.system.suspend-service: mAutosuspendEnabled=1
+07-22 23:29:40.436  1377  4324 V audio_utils::mutex: mutex_impl: audio_mutex initialized: ret:0  order:6
+07-22 23:29:40.437   709  4073 I android.system.suspend-service: First holding wakelock name = ApmOutput
+07-22 23:29:40.438 16419 16490 D WM-GreedyScheduler: Cancelling work ID 918d0b4d-b3cb-4efe-9d94-4327e7e1873e
+07-22 23:29:40.439   709  4073 I android.system.suspend-service: Last release wakelock name = ApmOutput
+07-22 23:29:40.439   709  4073 I android.system.suspend-service: mAutosuspendEnabled=1
+07-22 23:29:40.448 16419 16490 D WM-SystemJobScheduler: Scheduling work ID 918d0b4d-b3cb-4efe-9d94-4327e7e1873eJob ID 613246
+07-22 23:29:40.453 16419 16490 D WM-NetworkStateTracker: Unregistering network callback
+07-22 23:29:40.623  3331  3774 D CommonApp-254-10089: transport layer data is invalid
+07-22 23:29:40.836  1352  1352 D vendor.oplus.hardware.charger-V6-service: getChargerControl:sub_current=100
+07-22 23:29:40.836  1352  1352 D vendor.oplus.hardware.charger-V6-service: sub_voltage=3800
+07-22 23:29:40.836  1352  1352 D vendor.oplus.hardware.charger-V6-service: sub_soc=-1
+07-22 23:29:40.836  1352  1352 D vendor.oplus.hardware.charger-V6-service: sub_temperature=250
+07-22 23:29:40.836  1352  1352 D vendor.oplus.hardware.charger-V6-service: main_soc=75
+07-22 23:29:40.922  1702  1702 I thermal_repeater: [recvMdThermalInfo] ret=22, strLen=127,  3, 46, 8, 0, 32767, 1
+07-22 23:29:41.106  2265  3352 D AudioServiceExtImpl: oplusGetParameters() keyValuePairs:OPLUS_AUDIO_GET_FOCUS_STACK, uid: 1000
+07-22 23:29:41.107  2265  3352 I OplusHansManager : uid=10422, pkg=com.instagram.android F enter(), M stay=10
+07-22 23:29:41.108  1401  2032 D VRR [OTI]: handleIdle from 0 to 1
+07-22 23:29:41.109  1401  2032 D VRR [OTI-HW]: isStateReady 0
+07-22 23:29:41.109  1401  2032 D VRR [OTI-HW]: rate range: min {id=0, hwcId=0, resolution=1080x2412, vsyncRate=60.00 Hz, dpi=391.89x395.26, group=0, vrrConfig=N/A} cur {id=0, hwcId=0, resolution=1080x2412, vsyncRate=60.00 Hz, dpi=391.89x395.26, group=0, vrrConfig=N/A} max {id=0, hwcId=0, resolution=1080x2412, vsyncRate=60.00 Hz, dpi=391.89x395.26, group=0, vrrConfig=N/A}
+07-22 23:29:41.109  1401  2032 D VRR [OTI-HW]: keep rate.
+07-22 23:29:41.122  2265  3352 I OplusHansManager : freeze uid: 10422 com.instagram.android pids: [15235, 16090] IsolatedUid: [99955] scene: LcdOn
+07-22 23:29:41.124  2265  3357 I OplusHansManager : p_BC uid=10422 pkg=com.instagram.android
+07-22 23:29:41.124  2265  3357 I OplusBinderProxy: proxyBinder uid: 10422 pkg: com.instagram.android proxy: true calling: OFreezer
+07-22 23:29:41.124  9031  9035 D IHansComunication: HANS sendMessageToKernel: threadId = 494705544304, netLinkSetup = 1, type = PKG, targetUid = 10422, pkgCmd = ADD_ONE_UID
+07-22 23:29:41.536 32309 32439 D CloudConfig_stgyHelper: mspVersionCanSupport mspKitVersion : 2030110
+07-22 23:29:41.540 32309 32439 D CloudConfig_stgyHelper: getSupportKitMode strategyEntity : StrategyEntity(sdkInterval=1800000, strategyMode=1, minSDKVersion=1000, minKitVersion=2014122, validReqPeriod=7200000, maxReqProduct=100, forceKitIfKit=false, backoff=120000, enable=true, defaultLimit=RateLimitConfig{maxCalls=1, timeWindowSeconds=1800, callIntervalSeconds=0}, productLimits={})
+07-22 23:29:41.540 32309 32439 D CloudConfig_stgyHelper: getSupportKitMode localSdkVersion : 1227
+07-22 23:29:41.651  3331  3774 D CommonApp-254-10089: transport layer data is invalid
+07-22 23:29:41.934  3376  3376 D VendorWifiService: onEvent event:9,action:1
+07-22 23:29:41.940  2265  2732 D OplusWifiPower_TriggerCenter: mComponentCallback: wifistat
+07-22 23:29:41.951  1310  1310 D healthd : system healthd: battery l=75 v=4 t=38.2 h=2 st=2 c=-304 fc=4797000 cc=538 chg=u
+07-22 23:29:42.039  1310  1310 D healthd : system healthd: battery l=75 v=4 t=38.2 h=2 st=2 c=-326 fc=4797000 cc=538 chg=u
+07-22 23:29:42.091 12951 12951 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d''
+07-22 23:29:42.093  1682  2134 D ULogGuard: Monitoring: 2 threads, 0 requests, 0 time-bombs; 7 guards. ResetFlags = 0x7
+07-22 23:29:42.121  2265  2304 D AES     : AEEIOCTL_GET/SET_SF_STATE IOCTL,cmd= 1074294797, lParam=0. 
+07-22 23:29:42.121  2265  2304 D AES     : AEEIOCTL_RT_MON_Kick IOCTL,cmd= 2147774474, lParam=300. 
+07-22 23:29:42.125  9031  9035 D IHansComunication: HANS sendMessageToKernel: threadId = 494705544304, netLinkSetup = 1, type = FROZEN_TRANS, targetUid = 10422, pkgCmd = PKG_CMD_MAX
