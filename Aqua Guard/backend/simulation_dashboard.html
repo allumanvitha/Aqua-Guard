@@ -1,0 +1,2705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aqua Guard - Smart Water Simulation</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b1218;
+            --surface-color: rgba(21, 32, 43, 0.7);
+            --border-color: rgba(79, 195, 247, 0.15);
+            --primary-color: #4fc3f7;
+            --primary-gradient: linear-gradient(135deg, #80deea, #0288d1);
+            --secondary-color: #26c6da;
+            --danger-color: #e53935;
+            --danger-bg: rgba(229, 57, 53, 0.15);
+            --success-color: #4caf50;
+            --success-bg: rgba(76, 175, 80, 0.15);
+            --text-color: #e2e2e6;
+            --text-muted: rgba(226, 226, 230, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(2, 136, 209, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(38, 198, 218, 0.08) 0%, transparent 40%);
+        }
+
+        header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            background-color: rgba(11, 18, 24, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo i {
+            font-size: 28px;
+            color: var(--primary-color);
+            -webkit-text-fill-color: initial;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--success-bg);
+            color: var(--success-color);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .system-status.alarm {
+            background-color: var(--danger-bg);
+            color: var(--danger-color);
+            border-color: rgba(229, 57, 53, 0.3);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .main-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            flex-grow: 1;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 24px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(79, 195, 247, 0.3);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            color: var(--primary-color);
+        }
+
+        /* Water Tank Widget */
+        .tank-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .water-tank {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid rgba(79, 195, 247, 0.3);
+            position: relative;
+            overflow: hidden;
+            background-color: rgba(79, 195, 247, 0.05);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .water-wave {
+            position: absolute;
+            bottom: 0;
+            width: 200%;
+            height: 60%; /* Dynamic */
+            left: -50%;
+            background: linear-gradient(to top, #01579b, #0288d1, #80deea);
+            border-radius: 38%;
+            animation: wave 8s linear infinite;
+            transition: height 1s ease;
+        }
+
+        .water-wave::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 35%;
+            animation: wave 6s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .tank-percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            font-weight: 800;
+            z-index: 10;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Metric Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            height: 100%;
+        }
+
+        .metric-item {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .metric-item.alert-active {
+            border-color: rgba(229, 57, 53, 0.4);
+            background-color: rgba(229, 57, 53, 0.05);
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .metric-value {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        /* Control Card */
+        .control-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .control-row:not(:last-child) {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .control-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .control-info p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Switch toggle styles */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #37474f;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Simulation Panel */
+        .sim-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sim-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .sim-btn-primary {
+            background: var(--primary-gradient);
+            color: #0b1218;
+        }
+
+        .sim-btn-primary:hover {
+            box-shadow: 0 0 15px rgba(79, 195, 247, 0.4);
+        }
+
+        .sim-btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .sim-btn-danger:hover {
+            box-shadow: 0 0 15px rgba(229, 57, 53, 0.4);
+        }
+
+        .sim-btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .sim-btn-success:hover {
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
+        }
+
+        /* Log console */
+        .log-console {
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            height: 200px;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 12px;
+            overflow-y: auto;
+            color: #80deea;
+        }
+
+        .log-line {
+            margin-bottom: 6px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .log-time {
+            color: var(--text-muted);
+        }
+
+        .log-info { color: #80deea; }
+        .log-warn { color: #ffb74d; }
+        .log-error { color: #e57373; }
+
+        /* Chart Canvas Simulation */
+        .chart-box {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 140px;
+            padding-top: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chart-bar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 12%;
+        }
+
+        .chart-bar {
+            width: 100%;
+            background: linear-gradient(to top, #0288d1, #4fc3f7);
+            border-radius: 6px 6px 0 0;
+            transition: height 1s ease;
+        }
+
+        .chart-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* Login Styles */
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100vw;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(2, 136, 209, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(38, 198, 218, 0.15) 0%, transparent 45%);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .login-card {
+            background: rgba(21, 32, 43, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            padding: 40px 32px;
+            max-width: 420px;
+            width: 100%;
+            backdrop-filter: blur(24px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+            text-align: center;
+            animation: cardEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes cardEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .login-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 90px;
+            height: 90px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(128, 222, 234, 0.1), rgba(2, 136, 209, 0.1));
+            border: 1px solid rgba(79, 195, 247, 0.2);
+            color: var(--primary-color);
+            font-size: 42px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 24px rgba(2, 136, 209, 0.15);
+            animation: pulseLogo 3s infinite ease-in-out;
+        }
+
+        @keyframes pulseLogo {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(2, 136, 209, 0.15); }
+            50% { transform: scale(1.04); box-shadow: 0 8px 32px rgba(2, 136, 209, 0.3); }
+        }
+
+        .login-title {
+            font-size: 32px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .login-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            font-weight: 400;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px 16px 16px 48px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            color: var(--text-color);
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-color);
+            background-color: rgba(79, 195, 247, 0.02);
+            box-shadow: 0 0 12px rgba(79, 195, 247, 0.15);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 18px;
+            pointer-events: none;
+            transition: color 0.3s ease;
+        }
+
+        .input-group input:focus ~ .input-icon {
+            color: var(--primary-color);
+        }
+
+        .toggle-password-btn {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .toggle-password-btn:hover {
+            color: var(--text-color);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary-gradient);
+            color: #0b1218;
+            border: none;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 10px;
+            box-shadow: 0 4px 16px rgba(2, 136, 209, 0.25);
+        }
+
+        .login-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(2, 136, 209, 0.4);
+        }
+
+        .login-btn:active:not(:disabled) {
+            transform: translateY(1px);
+        }
+
+        .login-btn:disabled {
+            background: #263238;
+            color: rgba(255, 255, 255, 0.25);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .login-error-message {
+            background-color: var(--danger-bg);
+            color: var(--danger-color);
+            border: 1px solid rgba(229, 57, 53, 0.2);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            text-align: left;
+            animation: shakeError 0.4s ease-in-out;
+        }
+
+        @keyframes shakeError {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+
+        .login-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2.5px solid rgba(11, 18, 24, 0.2);
+            border-top: 2.5px solid #0b1218;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .forgot-password-link {
+            display: block;
+            text-align: right;
+            font-size: 13px;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-top: -12px;
+            margin-bottom: 24px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .auth-redirect-link {
+            display: inline-block;
+            font-size: 14px;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .auth-redirect-link:hover {
+            color: var(--primary-color);
+        }
+
+        .credentials-tip {
+            margin-top: 24px;
+            padding: 12px;
+            border-radius: 12px;
+            background-color: rgba(79, 195, 247, 0.05);
+            border: 1px dashed rgba(79, 195, 247, 0.2);
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            text-align: left;
+        }
+        .credentials-tip strong {
+            color: var(--primary-color);
+        }
+
+        /* Phone Frame Mockup Container */
+        .phone-frame {
+            max-width: 420px;
+            height: 840px;
+            background-color: var(--bg-color);
+            border: 12px solid #1c2630;
+            border-radius: 44px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            position: relative;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-bottom-width: 14px;
+            border-top-width: 14px;
+        }
+
+        /* Notch overlay */
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 24px;
+            background-color: #1c2630;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            z-index: 999;
+        }
+
+        /* Status bar */
+        .status-bar {
+            height: 36px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px 0 24px;
+            font-size: 12px;
+            color: var(--text-color);
+            background-color: rgba(11, 18, 24, 0.8);
+            z-index: 998;
+            font-weight: 600;
+        }
+
+        .status-bar-icons {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Header in-app */
+        .app-header {
+            height: 56px;
+            background-color: rgba(21, 32, 43, 0.5);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .app-header .logo {
+            font-size: 18px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .app-header .logo i {
+            font-size: 20px;
+            -webkit-text-fill-color: initial;
+        }
+
+        /* App Body and Screen Switching */
+        .app-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            position: relative;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            scrollbar-width: none;
+        }
+        .app-body::-webkit-scrollbar {
+            display: none;
+        }
+
+        .app-screen {
+            display: none;
+            padding: 16px;
+            flex-direction: column;
+            gap: 16px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            width: 100%;
+        }
+
+        .app-screen.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Bottom Nav Menu */
+        .bottom-nav {
+            height: 72px;
+            background-color: rgba(15, 23, 30, 0.95);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 6px;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex: 1;
+            padding: 6px 0;
+            font-family: 'Outfit', sans-serif;
+            text-decoration: none;
+        }
+
+        .nav-icon-wrapper {
+            width: 48px;
+            height: 28px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 4px;
+        }
+
+        .nav-label {
+            font-size: 10px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active {
+            color: var(--primary-color);
+        }
+
+        .nav-item.active .nav-icon-wrapper {
+            background-color: rgba(79, 195, 247, 0.15);
+            color: var(--primary-color);
+        }
+
+        .nav-item.active .nav-label {
+            font-weight: 700;
+        }
+
+        /* Override layouts inside screens */
+        .app-screen .card {
+            width: 100%;
+            margin-bottom: 0;
+            padding: 20px;
+        }
+
+        /* CCTV Video viewport adjustments for mobile layout */
+        .cctv-column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .cctv-viewport-box {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            background-color: #05080c;
+            height: 220px;
+            width: 100%;
+        }
+
+        .cctv-controls-row {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .cctv-filters-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .cctv-ptz-layout {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255,255,255,0.02);
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            gap: 12px;
+        }
+
+        .ptz-joystick {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            justify-items: center;
+            align-items: center;
+        }
+
+        .ptz-zoom {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        /* Responsive behavior: if viewed on small screens, behave like standard mobile site */
+        @media (max-width: 500px) {
+            .phone-frame {
+                max-width: 100%;
+                height: 100vh;
+                border: none;
+                border-radius: 0;
+                margin: 0;
+                box-shadow: none;
+            }
+            .phone-frame::before {
+                display: none;
+            }
+            .status-bar {
+                display: none; /* Hide status bar since the device has its own */
+            }
+        }
+</head>
+<body>
+
+    <!-- Dashboard View (Hidden initially) -->
+    <div id="dashboard-view" style="display: none;">
+        <div class="phone-frame">
+            <!-- Simulated Notch and Status Bar -->
+            <div class="status-bar">
+                <span id="status-bar-time">21:00</span>
+                <div class="status-bar-icons">
+                    <i class="fa-solid fa-wifi" style="font-size: 11px;"></i>
+                    <i class="fa-solid fa-signal" style="font-size: 11px;"></i>
+                    <i class="fa-solid fa-battery-three-quarters" style="font-size: 13px;"></i>
+                </div>
+            </div>
+
+            <!-- In-App Header -->
+            <div class="app-header">
+                <div class="logo">
+                    <i class="fa-solid fa-droplet"></i>
+                    <span>Aqua Guard</span>
+                </div>
+                <button id="btn-logout" class="sim-btn" style="padding: 6px 12px; font-size: 11px; border-radius: 12px; margin: 0; background-color: rgba(229, 57, 53, 0.12); color: #e53935; border: 1px solid rgba(229, 57, 53, 0.25); width: auto; height: 28px; cursor: pointer; display: flex; align-items: center; gap: 4px; font-weight: 600; transition: all 0.3s ease;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+                </button>
+            </div>
+
+            <!-- App Scrollable Body -->
+            <div class="app-body">
+                
+                <!-- SCREEN 1: HOME (Dashboard) -->
+                <div id="screen-home" class="app-screen active">
+                    <!-- Water Tank Card -->
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-glass-water"></i>
+                            <span>Water Tank Level</span>
+                        </div>
+                        <div class="tank-container">
+                            <div class="water-tank">
+                                <div id="tank-water" class="water-wave" style="height: 68%;"></div>
+                                <div id="tank-text" class="tank-percentage">68%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Metrics Card -->
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-chart-simple"></i>
+                            <span>Live Metrics</span>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <span class="metric-label">Flow Rate</span>
+                                <span id="flow-val" class="metric-value">12.5 L/min</span>
+                            </div>
+                            <div id="leak-metric" class="metric-item">
+                                <span class="metric-label">Leak Status</span>
+                                <span id="leak-val" class="metric-value" style="color: var(--success-color);">Secure</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Water Saved Today</span>
+                                <span class="metric-value" style="color: var(--success-color);">18.5 L</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Daily Consumption</span>
+                                <span id="daily-total" class="metric-value">112.4 L</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls Card -->
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-sliders"></i>
+                            <span>System Controls</span>
+                        </div>
+                        <div class="control-row">
+                            <div class="control-info">
+                                <h4>Solenoid Valve</h4>
+                                <p id="valve-desc">Valve is OPEN (Water Flowing)</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="valve-toggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="control-row">
+                            <div class="control-info">
+                                <h4>Auto Protection Mode</h4>
+                                <p>Automatically shuts off valve on leakage/overflow</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="auto-toggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SCREEN 2: CCTV MONITORING -->
+                <div id="screen-cctv" class="app-screen">
+                    <div class="card" style="display: flex; flex-direction: column; gap: 14px;">
+                        <div class="card-title" style="margin-bottom: 0; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fa-solid fa-video"></i>
+                                <span>Live Monitoring</span>
+                            </div>
+                        </div>
+                        <div class="camera-tabs" style="display: flex; gap: 6px; width: 100%;">
+                            <button id="cam1-tab" class="sim-btn" style="flex: 1; padding: 6px 10px; font-size: 11px; border-radius: 8px; background-color: var(--primary-color); color: #0b1218; margin: 0;">CAM-01: Tank</button>
+                            <button id="cam2-tab" class="sim-btn" style="flex: 1; padding: 6px 10px; font-size: 11px; border-radius: 8px; background-color: #37474f; color: white; margin: 0;">CAM-02: Valve</button>
+                            <button id="cam3-tab" class="sim-btn" style="flex: 1; padding: 6px 10px; font-size: 11px; border-radius: 8px; background-color: #37474f; color: white; margin: 0;"><i class="fa-solid fa-camera" style="margin-right: 4px;"></i>Live Feed</button>
+                        </div>
+
+                        <!-- Webcam Video Source Selector Panel (Only shown when CAM-03 is active) -->
+                        <div id="webcam-source-control" style="display: none; align-items: center; justify-content: space-between; gap: 10px; background-color: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-top: 4px; margin-bottom: 4px; width: 100%;">
+                            <span class="metric-label" style="font-size: 11px; margin: 0;">Video Source:</span>
+                            <div style="display: flex; gap: 6px;">
+                                <button id="btn-src-webcam" class="sim-btn" style="padding: 4px 8px; font-size: 10px; border-radius: 6px; background-color: var(--primary-color); color: #0b1218; margin: 0;">Webcam</button>
+                                <button id="btn-src-file" class="sim-btn" style="padding: 4px 8px; font-size: 10px; border-radius: 6px; background-color: #37474f; color: white; margin: 0;">Video File</button>
+                            </div>
+                            <input type="file" id="video-file-input" accept="video/*" style="display: none;">
+                        </div>
+
+                        <div class="cctv-column">
+                            <!-- Camera Viewport Container -->
+                            <div class="cctv-viewport-box">
+                                <div class="scanlines" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); background-size: 100% 4px, 6px 100%; z-index: 5; pointer-events: none;"></div>
+                                <div class="vignette" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; box-shadow: inset 0 0 80px rgba(0,0,0,0.8); z-index: 6; pointer-events: none;"></div>
+                                
+                                <canvas id="camera-canvas" width="640" height="350" style="display: block; width: 100%; height: 100%; background-color: #080f14;"></canvas>
+                                <video id="webcam-video" autoplay playsinline style="display: none;"></video>
+                                
+                                <div id="cam-rec" style="position: absolute; top: 10px; left: 10px; display: flex; align-items: center; gap: 4px; background-color: rgba(0, 0, 0, 0.6); padding: 3px 6px; border-radius: 4px; font-size: 10px; z-index: 10; color: #fff;">
+                                    <span style="display: inline-block; width: 6px; height: 6px; background-color: #e53935; border-radius: 50%; animation: pulse 1s infinite;"></span>
+                                    <span id="cam-rec-text">REC 1080P</span>
+                                </div>
+
+                                <div id="cam-signal" style="position: absolute; top: 10px; right: 10px; display: flex; align-items: center; gap: 4px; background-color: rgba(0, 0, 0, 0.6); padding: 3px 6px; border-radius: 4px; font-size: 10px; z-index: 10; color: var(--primary-color);">
+                                    <i class="fa-solid fa-wifi"></i>
+                                    <span>92%</span>
+                                </div>
+
+                                <div id="cam-name" style="position: absolute; bottom: 10px; left: 10px; background-color: rgba(0, 0, 0, 0.6); padding: 3px 6px; border-radius: 4px; font-size: 9px; z-index: 10; font-family: monospace; color: #fff;">
+                                    CAM-01 // TANK_CHAMBER_A
+                                </div>
+
+                                <div id="cam-time" style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0, 0, 0, 0.6); padding: 3px 6px; border-radius: 4px; font-size: 9px; z-index: 10; font-family: monospace; color: #fff;">
+                                    2026-06-28 20:00:00
+                                </div>
+
+                                <div id="cam-anomaly" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(229, 57, 53, 0.9); color: white; padding: 6px 12px; border-radius: 6px; font-weight: 800; font-size: 12px; z-index: 10; border: 1.5px solid white; animation: pulse 1s infinite; letter-spacing: 1px; text-transform: uppercase; text-align: center;">
+                                    <i class="fa-solid fa-triangle-exclamation" style="margin-right: 4px;"></i>ANOMALY DETECTED
+                                </div>
+                            </div>
+
+                            <div class="cctv-controls-row">
+                                <!-- Filter Selector -->
+                                <div>
+                                    <span class="metric-label" style="font-size: 11px; font-weight: 600; display: block; margin-bottom: 6px;">Video Filter</span>
+                                    <div class="cctv-filters-grid">
+                                        <button id="filter-normal" class="sim-btn" style="padding: 6px; font-size: 11px; border-radius: 8px; margin: 0; background-color: var(--primary-color); color: #0b1218;">Normal</button>
+                                        <button id="filter-nv" class="sim-btn" style="padding: 6px; font-size: 11px; border-radius: 8px; margin: 0; background-color: #37474f; color: white;">Night</button>
+                                        <button id="filter-thermal" class="sim-btn" style="padding: 6px; font-size: 11px; border-radius: 8px; margin: 0; background-color: #37474f; color: white;">Thermal</button>
+                                    </div>
+                                </div>
+
+                                <!-- PTZ Controls -->
+                                <div class="cctv-ptz-layout">
+                                    <div class="ptz-joystick">
+                                        <div></div>
+                                        <button id="ptz-up" class="sim-btn" style="padding: 4px; margin:0; border-radius: 6px; background-color: #37474f; color: white; width: 28px; height: 28px;"><i class="fa-solid fa-chevron-up" style="font-size: 10px;"></i></button>
+                                        <div></div>
+                                        <button id="ptz-left" class="sim-btn" style="padding: 4px; margin:0; border-radius: 6px; background-color: #37474f; color: white; width: 28px; height: 28px;"><i class="fa-solid fa-chevron-left" style="font-size: 10px;"></i></button>
+                                        <button id="ptz-reset" class="sim-btn" style="padding: 4px; margin:0; border-radius: 6px; background-color: #37474f; color: white; width: 28px; height: 28px; font-size: 9px;"><i class="fa-solid fa-circle"></i></button>
+                                        <button id="ptz-right" class="sim-btn" style="padding: 4px; margin:0; border-radius: 6px; background-color: #37474f; color: white; width: 28px; height: 28px;"><i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i></button>
+                                        <div></div>
+                                        <button id="ptz-down" class="sim-btn" style="padding: 4px; margin:0; border-radius: 6px; background-color: #37474f; color: white; width: 28px; height: 28px;"><i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></button>
+                                        <div></div>
+                                    </div>
+                                    <div class="ptz-zoom">
+                                        <button id="ptz-zoomin" class="sim-btn" style="padding: 6px; margin:0; border-radius: 8px; background-color: #37474f; color: white; font-size: 11px; display: flex; align-items: center; justify-content: center; gap: 4px;"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom In</button>
+                                        <button id="ptz-zoomout" class="sim-btn" style="padding: 6px; margin:0; border-radius: 8px; background-color: #37474f; color: white; font-size: 11px; display: flex; align-items: center; justify-content: center; gap: 4px;"><i class="fa-solid fa-magnifying-glass-minus"></i> Zoom Out</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SCREEN 3: ANALYTICS -->
+                <div id="screen-analytics" class="app-screen">
+                    <!-- Usage Trend Card -->
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>Weekly Usage History</span>
+                        </div>
+                        <div class="chart-box">
+                            <div class="chart-bar-container">
+                                <div class="chart-bar" style="height: 60px;"></div>
+                                <span class="chart-label">M</span>
+                            </div>
+                            <div class="chart-bar-container">
+                                <div class="chart-bar" style="height: 80px;"></div>
+                                <span class="chart-label">T</span>
+                            </div>
+                            <div class="chart-bar-container">
+                                <div class="chart-bar" style="height: 45px;"></div>
+                                <span class="chart-label">W</span>
+                            </div>
+                            <div class="chart-bar-container">
+                                <div class="chart-bar" style="height: 110px;"></div>
+                                <span class="chart-label">T</span>
+                            </div>
+                            <div class="chart-bar-container">
+                                <div class="chart-bar" style="height: 95px;"></div>
+                                <span class="chart-label">F</span>
+                            </div>
+                            <div class="chart-bar-container">
+                                <div class="chart-bar" style="height: 125px;"></div>
+                                <span class="chart-label">S</span>
+                            </div>
+                            <div class="chart-bar-container">
+                                <div class="chart-bar" style="height: 70px;"></div>
+                                <span class="chart-label">S</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Summary Card -->
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span>Usage Summary</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">
+                                <span style="color: var(--text-muted);">Weekly Average</span>
+                                <span style="font-weight: 600;">86.3 Liters/day</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">
+                                <span style="color: var(--text-muted);">Peak Usage (Sat)</span>
+                                <span style="font-weight: 600; color: var(--secondary-color);">125.0 Liters</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding-bottom: 4px;">
+                                <span style="color: var(--text-muted);">Est. Monthly Bill Save</span>
+                                <span style="font-weight: 600; color: var(--success-color);">$14.25 Saved</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SCREEN 4: ALERTS & EVENTS -->
+                <div id="screen-alerts" class="app-screen">
+                    <!-- Status Banner -->
+                    <div class="card" style="padding: 16px;">
+                        <div id="status-badge" class="system-status" style="justify-content: center; font-size: 15px; padding: 10px; border-radius: 14px; width: 100%;">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span id="status-text">System Secure</span>
+                        </div>
+                    </div>
+
+                    <!-- Logs Console Card -->
+                    <div class="card" style="display: flex; flex-direction: column; flex-grow: 1;">
+                        <div class="card-title" style="margin-bottom: 12px;">
+                            <i class="fa-solid fa-bell"></i>
+                            <span>Notifications & Log</span>
+                        </div>
+                        <div id="console" class="log-console" style="flex-grow: 1; height: 350px;">
+                            <div class="log-line">
+                                <span class="log-time">[19:42:00]</span>
+                                <span class="log-info">ESP32 Initialized. Connected to Wi-Fi.</span>
+                            </div>
+                            <div class="log-line">
+                                <span class="log-time">[19:42:02]</span>
+                                <span class="log-info">Streaming live status to Firebase RTDB.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SCREEN 5: HARDWARE SIMULATOR (DEV TOOLS) -->
+                <div id="screen-dev" class="app-screen">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-microchip"></i>
+                            <span>ESP32 Hardware Panel</span>
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.4;">
+                            Simulate ESP32 microcontroller board alerts to test automatic solenoid valve emergency behaviors.
+                        </p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <button id="btn-leak" class="sim-btn sim-btn-danger" style="margin: 0; font-size: 13px; padding: 12px;">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Trigger Water Leakage
+                            </button>
+                            <button id="btn-overflow" class="sim-btn sim-btn-primary" style="margin: 0; font-size: 13px; padding: 12px;">
+                                <i class="fa-solid fa-water"></i> Trigger Tank Overflow
+                            </button>
+                            <button id="btn-reset" class="sim-btn sim-btn-success" style="margin: 0; font-size: 13px; padding: 12px;">
+                                <i class="fa-solid fa-rotate-left"></i> Reset Simulation
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-network-wired"></i>
+                            <span>Hardware Info</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: var(--text-muted);">IP Address</span>
+                                <span style="font-family: monospace;">192.168.1.145</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: var(--text-muted);">Board Model</span>
+                                <span>ESP32-WROOM-32D</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: var(--text-muted);">Relay State</span>
+                                <span>Active High</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="bottom-nav">
+                <div id="nav-home" class="nav-item active">
+                    <div class="nav-icon-wrapper">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <span class="nav-label">Home</span>
+                </div>
+                <div id="nav-cctv" class="nav-item">
+                    <div class="nav-icon-wrapper">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
+                    <span class="nav-label">CCTV</span>
+                </div>
+                <div id="nav-analytics" class="nav-item">
+                    <div class="nav-icon-wrapper">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <span class="nav-label">Analytics</span>
+                </div>
+                <div id="nav-alerts" class="nav-item">
+                    <div class="nav-icon-wrapper">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <span class="nav-label">Alerts</span>
+                </div>
+                <div id="nav-dev" class="nav-item">
+                    <div class="nav-icon-wrapper">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <span class="nav-label">ESP32</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Android-Style Login View -->
+    <div id="login-view" class="login-container">
+        <div class="login-card">
+            <div class="login-logo">
+                <i class="fa-solid fa-droplet"></i>
+            </div>
+            <h1 id="auth-title" class="login-title">Aqua Guard</h1>
+            <p id="auth-subtitle" class="login-subtitle">Smart Water Management System</p>
+            
+            <div id="login-error" class="login-error-message" style="display: none;"></div>
+            <div id="login-success" class="system-status" style="display: none; background-color: var(--success-bg); color: var(--success-color); border: 1px solid rgba(76,175,80,0.3); padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 600; margin-bottom: 24px; text-align: center; width: 100%;"></div>
+            
+            <!-- Login Form -->
+            <form id="login-form" onsubmit="event.preventDefault();">
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope input-icon"></i>
+                    <input type="email" id="login-email" placeholder="Email Address" required>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <button type="button" id="login-toggle-password" class="toggle-password-btn">
+                        <i class="fa-solid fa-eye-slash"></i>
+                    </button>
+                </div>
+                
+                <a href="#" id="link-forgot-password" class="forgot-password-link">Forgot Password?</a>
+                
+                <button type="submit" id="login-submit-btn" class="login-btn" disabled>
+                    <span id="login-btn-text">Sign In</span>
+                    <div id="login-btn-spinner" class="login-spinner" style="display: none;"></div>
+                </button>
+                
+                <div style="margin-top: 16px;">
+                    <a id="link-to-register" class="auth-redirect-link">Don't have an account? Sign Up</a>
+                </div>
+                
+                <!-- Credentials Tip Helper -->
+                <div class="credentials-tip">
+                    Demo Login Credentials:<br>
+                    Email: <strong>admin@aquaguard.com</strong><br>
+                    Password: <strong>admin123</strong>
+                </div>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" onsubmit="event.preventDefault();" style="display: none;">
+                <div class="input-group">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input type="text" id="register-name" placeholder="Full Name" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope input-icon"></i>
+                    <input type="email" id="register-email" placeholder="Email Address" required>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" id="register-password" placeholder="Password" required>
+                    <button type="button" id="register-toggle-password" class="toggle-password-btn">
+                        <i class="fa-solid fa-eye-slash"></i>
+                    </button>
+                </div>
+                
+                <button type="submit" id="register-submit-btn" class="login-btn" disabled>
+                    <span id="register-btn-text">Sign Up</span>
+                    <div id="register-btn-spinner" class="login-spinner" style="display: none;"></div>
+                </button>
+                
+                <div style="margin-top: 16px;">
+                    <a id="link-to-login-from-reg" class="auth-redirect-link">Already have an account? Sign In</a>
+                </div>
+            </form>
+
+            <!-- Forgot Password Form -->
+            <form id="forgot-form" onsubmit="event.preventDefault();" style="display: none;">
+                <p style="font-size: 13.5px; color: var(--text-muted); margin-top: -16px; margin-bottom: 24px; text-align: left; line-height: 1.5;">
+                    Enter the email address associated with your account, and we will simulate sending a password reset link.
+                </p>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope input-icon"></i>
+                    <input type="email" id="forgot-email" placeholder="Email Address" required>
+                </div>
+                
+                <button type="submit" id="forgot-submit-btn" class="login-btn" disabled>
+                    <span id="forgot-btn-text">Send Reset Link</span>
+                    <div id="forgot-btn-spinner" class="login-spinner" style="display: none;"></div>
+                </button>
+                
+                <div style="margin-top: 16px;">
+                    <a id="link-to-login-from-forgot" class="auth-redirect-link">Back to Sign In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const valveToggle = document.getElementById('valve-toggle');
+        const autoToggle = document.getElementById('auto-toggle');
+        const flowVal = document.getElementById('flow-val');
+        const leakVal = document.getElementById('leak-val');
+        const leakMetric = document.getElementById('leak-metric');
+        const tankWater = document.getElementById('tank-water');
+        const tankText = document.getElementById('tank-text');
+        const statusBadge = document.getElementById('status-badge');
+        const statusText = document.getElementById('status-text');
+        const valveDesc = document.getElementById('valve-desc');
+        const consoleLog = document.getElementById('console');
+        
+        // Buttons
+        const btnLeak = document.getElementById('btn-leak');
+        const btnOverflow = document.getElementById('btn-overflow');
+        const btnReset = document.getElementById('btn-reset');
+
+        // Auth Common Elements
+        const loginView = document.getElementById('login-view');
+        const dashboardView = document.getElementById('dashboard-view');
+        const authTitle = document.getElementById('auth-title');
+        const authSubtitle = document.getElementById('auth-subtitle');
+        const loginError = document.getElementById('login-error');
+        const loginSuccess = document.getElementById('login-success');
+        const btnLogout = document.getElementById('btn-logout');
+
+        // Login Page Elements
+        const loginForm = document.getElementById('login-form');
+        const loginEmail = document.getElementById('login-email');
+        const loginPassword = document.getElementById('login-password');
+        const loginTogglePassword = document.getElementById('login-toggle-password');
+        const loginSubmitBtn = document.getElementById('login-submit-btn');
+        const loginBtnText = document.getElementById('login-btn-text');
+        const loginBtnSpinner = document.getElementById('login-btn-spinner');
+        const linkForgotPassword = document.getElementById('link-forgot-password');
+        const linkToRegister = document.getElementById('link-to-register');
+
+        // Register Page Elements
+        const registerForm = document.getElementById('register-form');
+        const registerName = document.getElementById('register-name');
+        const registerEmail = document.getElementById('register-email');
+        const registerPassword = document.getElementById('register-password');
+        const registerTogglePassword = document.getElementById('register-toggle-password');
+        const registerSubmitBtn = document.getElementById('register-submit-btn');
+        const registerBtnText = document.getElementById('register-btn-text');
+        const registerBtnSpinner = document.getElementById('register-btn-spinner');
+        const linkToLoginFromReg = document.getElementById('link-to-login-from-reg');
+
+        // Forgot Password Page Elements
+        const forgotForm = document.getElementById('forgot-form');
+        const forgotEmail = document.getElementById('forgot-email');
+        const forgotSubmitBtn = document.getElementById('forgot-submit-btn');
+        const forgotBtnText = document.getElementById('forgot-btn-text');
+        const forgotBtnSpinner = document.getElementById('forgot-btn-spinner');
+        const linkToLoginFromForgot = document.getElementById('link-to-login-from-forgot');
+
+        // State variables
+        let valveOpen = true;
+        let autoMode = true;
+        let leakDetected = false;
+        let waterLevel = 68;
+        let flowRate = 12.5;
+
+        // Log Console Helper
+        function addLog(message, type = 'info') {
+            const now = new Date();
+            const timeStr = `[${now.toTimeString().split(' ')[0]}]`;
+            
+            const line = document.createElement('div');
+            line.className = 'log-line';
+            
+            const timeSpan = document.createElement('span');
+            timeSpan.className = 'log-time';
+            timeSpan.textContent = timeStr;
+            
+            const msgSpan = document.createElement('span');
+            msgSpan.className = `log-${type}`;
+            msgSpan.textContent = message;
+            
+            line.appendChild(timeSpan);
+            line.appendChild(msgSpan);
+            consoleLog.appendChild(line);
+            consoleLog.scrollTop = consoleLog.scrollHeight;
+        }
+
+        // Update UI based on state
+        function updateUI() {
+            // Valve
+            valveToggle.checked = valveOpen;
+            if (valveOpen) {
+                flowRate = leakDetected ? 24.8 : 12.5;
+                flowVal.textContent = `${flowRate} L/min`;
+                valveDesc.textContent = "Valve is OPEN (Water Flowing)";
+                valveDesc.style.color = "var(--primary-color)";
+            } else {
+                flowRate = 0;
+                flowVal.textContent = "0.0 L/min";
+                valveDesc.textContent = "Valve is CLOSED (Water Blocked)";
+                valveDesc.style.color = "var(--danger-color)";
+            }
+
+            // Tank
+            tankWater.style.height = `${waterLevel}%`;
+            tankText.textContent = `${waterLevel}%`;
+
+            // Leak
+            if (leakDetected) {
+                leakVal.textContent = "LEAK DETECTED";
+                leakVal.style.color = "var(--danger-color)";
+                leakMetric.classList.add('alert-active');
+            } else {
+                leakVal.textContent = "Secure";
+                leakVal.style.color = "var(--success-color)";
+                leakMetric.classList.remove('alert-active');
+            }
+
+            // Alarm Badges
+            if (leakDetected) {
+                statusBadge.className = "system-status alarm";
+                statusText.textContent = "CRITICAL ALARM: LEAK";
+            } else if (waterLevel >= 95) {
+                statusBadge.className = "system-status alarm";
+                statusText.textContent = "WARNING: TANK OVERFLOW";
+            } else {
+                statusBadge.className = "system-status";
+                statusText.textContent = "System Secure";
+            }
+        }
+
+        // Toggle Valve manually
+        valveToggle.addEventListener('change', (e) => {
+            valveOpen = e.target.checked;
+            addLog(`User requested Valve ${valveOpen ? 'OPEN' : 'CLOSE'}.`, 'info');
+            updateUI();
+        });
+
+        // Toggle Auto Mode
+        autoToggle.addEventListener('change', (e) => {
+            autoMode = e.target.checked;
+            addLog(`Auto Protection Mode ${autoMode ? 'ENABLED' : 'DISABLED'}.`, 'info');
+        });
+
+        // Simulate Leakage
+        btnLeak.addEventListener('click', () => {
+            leakDetected = true;
+            addLog("HARDWARE ALERT: Moisture sensor triggered. Leak detected!", "error");
+            
+            if (autoMode) {
+                valveOpen = false;
+                addLog("AUTO-PROTECTION: Safety shutoff triggered. Closing solenoid valve.", "warn");
+            } else {
+                addLog("WARNING: Leak detected but Auto Mode is disabled. Valve remains open!", "warn");
+            }
+            updateUI();
+        });
+
+        // Simulate Overflow
+        btnOverflow.addEventListener('click', () => {
+            waterLevel = 98;
+            addLog("HARDWARE ALERT: Ultrasonic sensor reports water level at 98%.", "warn");
+            
+            if (autoMode) {
+                valveOpen = false;
+                addLog("AUTO-PROTECTION: Tank full. Closing solenoid valve to prevent overflow.", "warn");
+            }
+            updateUI();
+        });
+
+        // Reset
+        btnReset.addEventListener('click', () => {
+            leakDetected = false;
+            waterLevel = 68;
+            valveOpen = true;
+            addLog("Simulation reset. Systems returned to normal operation.", "success");
+            updateUI();
+        });
+
+        // Background simulation logic (simulate slow water consumption/filling)
+        setInterval(() => {
+            if (valveOpen && waterLevel < 95 && !leakDetected) {
+                waterLevel = Math.min(95, waterLevel + 1);
+                updateUI();
+            }
+        }, 6000);
+
+        // --- LIVE VIDEO MONITORING SIMULATION ---
+        const canvas = document.getElementById('camera-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // State for video
+        let activeCam = 'cam1'; // 'cam1', 'cam2', or 'cam3'
+        let videoFilter = 'normal'; // 'normal', 'nv', 'thermal'
+        let ptzX = 0;
+        let ptzY = 0;
+        let ptzZoom = 1.0;
+        let staticIntensity = 0.0;
+        
+        // Webcam & Video File state
+        let webcamStream = null;
+        let webcamActive = false;
+        let webcamError = false;
+        let activeVideoUrl = null; // Store local file object URL to revoke later
+        let videoSourceMode = 'webcam'; // 'webcam' or 'file'
+        
+        const webcamVideo = document.getElementById('webcam-video');
+        
+        // Webcam Source Control DOM elements
+        const webcamSourceControl = document.getElementById('webcam-source-control');
+        const btnSrcWebcam = document.getElementById('btn-src-webcam');
+        const btnSrcFile = document.getElementById('btn-src-file');
+        const videoFileInput = document.getElementById('video-file-input');
+        
+        // Droplets for Cam 1
+        let droplets = [];
+        // Particles for Cam 2
+        let particles = [];
+
+        // UI Tabs & controls
+        const cam1Tab = document.getElementById('cam1-tab');
+        const cam2Tab = document.getElementById('cam2-tab');
+        const cam3Tab = document.getElementById('cam3-tab');
+        const filterNormal = document.getElementById('filter-normal');
+        const filterNv = document.getElementById('filter-nv');
+        const filterThermal = document.getElementById('filter-thermal');
+        const camName = document.getElementById('cam-name');
+        const camTime = document.getElementById('cam-time');
+        const camAnomaly = document.getElementById('cam-anomaly');
+        const camRecText = document.getElementById('cam-rec-text');
+        
+        // PTZ Buttons
+        const ptzUp = document.getElementById('ptz-up');
+        const ptzDown = document.getElementById('ptz-down');
+        const ptzLeft = document.getElementById('ptz-left');
+        const ptzRight = document.getElementById('ptz-right');
+        const ptzReset = document.getElementById('ptz-reset');
+        const ptzZoomIn = document.getElementById('ptz-zoomin');
+        const ptzZoomOut = document.getElementById('ptz-zoomout');
+
+        function switchCamera(cam) {
+            activeCam = cam;
+            staticIntensity = 1.0;
+            
+            // Turn off webcam stream if switching away from cam3
+            if (cam !== 'cam3') {
+                stopWebcam();
+                if (webcamVideo) webcamVideo.pause();
+                if (webcamSourceControl) webcamSourceControl.style.display = 'none';
+            } else {
+                if (webcamSourceControl) webcamSourceControl.style.display = 'flex';
+            }
+            
+            // Clear styles for all tabs
+            [cam1Tab, cam2Tab, cam3Tab].forEach(tab => {
+                if (tab) {
+                    tab.style.backgroundColor = '#37474f';
+                    tab.style.color = 'white';
+                }
+            });
+            
+            if (cam === 'cam1') {
+                cam1Tab.style.backgroundColor = 'var(--primary-color)';
+                cam1Tab.style.color = '#0b1218';
+                camName.textContent = 'CAM-01 // TANK_CHAMBER_A';
+                addLog('Switched feed to Camera 1 (Tank).', 'info');
+            } else if (cam === 'cam2') {
+                cam2Tab.style.backgroundColor = 'var(--primary-color)';
+                cam2Tab.style.color = '#0b1218';
+                camName.textContent = 'CAM-02 // INLET_VALVE_B';
+                addLog('Switched feed to Camera 2 (Valve).', 'info');
+            } else if (cam === 'cam3') {
+                cam3Tab.style.backgroundColor = 'var(--primary-color)';
+                cam3Tab.style.color = '#0b1218';
+                camName.textContent = videoSourceMode === 'webcam' ? 'CAM-03 // LIVE_WEBCAM_FEED' : 'CAM-03 // CUSTOM_VIDEO_FEED';
+                addLog('Initiating Live Feed screen...', 'info');
+                
+                if (videoSourceMode === 'webcam') {
+                    startWebcam();
+                } else {
+                    if (webcamVideo && webcamVideo.src) {
+                        webcamActive = true;
+                        webcamError = false;
+                        webcamVideo.play().catch(err => console.error("File play resume failed:", err));
+                    } else {
+                        addLog("No video file loaded. Click 'Video File' to select a clip.", "warn");
+                    }
+                }
+            }
+        }
+
+        function switchFilter(filter) {
+            videoFilter = filter;
+            staticIntensity = 0.5;
+            
+            [filterNormal, filterNv, filterThermal].forEach(btn => {
+                btn.style.backgroundColor = '#37474f';
+                btn.style.color = 'white';
+            });
+
+            if (filter === 'normal') {
+                filterNormal.style.backgroundColor = 'var(--primary-color)';
+                filterNormal.style.color = '#0b1218';
+                camRecText.textContent = 'REC 1080P';
+            } else if (filter === 'nv') {
+                filterNv.style.backgroundColor = 'var(--primary-color)';
+                filterNv.style.color = '#0b1218';
+                camRecText.textContent = 'REC 1080P IR';
+            } else if (filter === 'thermal') {
+                filterThermal.style.backgroundColor = 'var(--primary-color)';
+                filterThermal.style.color = '#0b1218';
+                camRecText.textContent = 'REC 1080P FLIR';
+            }
+        }
+
+        // Add event listeners
+        cam1Tab.addEventListener('click', () => switchCamera('cam1'));
+        cam2Tab.addEventListener('click', () => switchCamera('cam2'));
+        if (cam3Tab) {
+            cam3Tab.addEventListener('click', () => switchCamera('cam3'));
+        }
+        
+        // Canvas click handler to easily load video files if webcam access is denied
+        canvas.addEventListener('click', () => {
+            if (activeCam === 'cam3') {
+                if (videoSourceMode === 'file' || webcamError) {
+                    if (videoFileInput) videoFileInput.click();
+                }
+            }
+        });
+        
+        filterNormal.addEventListener('click', () => switchFilter('normal'));
+        filterNv.addEventListener('click', () => switchFilter('nv'));
+        filterThermal.addEventListener('click', () => switchFilter('thermal'));
+
+        // PTZ handlers
+        ptzUp.addEventListener('click', () => { ptzY = Math.max(-50, ptzY - 10); });
+        ptzDown.addEventListener('click', () => { ptzY = Math.min(50, ptzY + 10); });
+        ptzLeft.addEventListener('click', () => { ptzX = Math.max(-50, ptzX - 10); });
+        ptzRight.addEventListener('click', () => { ptzX = Math.min(50, ptzX + 10); });
+        ptzReset.addEventListener('click', () => { ptzX = 0; ptzY = 0; ptzZoom = 1.0; });
+        ptzZoomIn.addEventListener('click', () => { ptzZoom = Math.min(2.5, ptzZoom + 0.15); });
+        ptzZoomOut.addEventListener('click', () => { ptzZoom = Math.max(0.8, ptzZoom - 0.15); });
+
+        // Animation calculations
+        let animFrame = 0;
+
+        function renderCamera() {
+            animFrame++;
+            
+            // Clear canvas
+            ctx.fillStyle = '#080f14';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.save();
+            // Apply PTZ adjustments
+            ctx.translate(canvas.width / 2 + ptzX, canvas.height / 2 + ptzY);
+            ctx.scale(ptzZoom, ptzZoom);
+            ctx.translate(-canvas.width / 2, -canvas.height / 2);
+
+            // Draw content based on active camera
+            if (activeCam === 'cam1') {
+                drawTankView();
+            } else if (activeCam === 'cam2') {
+                drawValveView();
+            } else if (activeCam === 'cam3') {
+                drawWebcamView();
+            }
+
+            ctx.restore();
+
+            // Post-processing filter effects
+            applyVideoFilter();
+
+            // Draw Static Noise
+            if (staticIntensity > 0) {
+                drawStaticNoise();
+                staticIntensity -= 0.05;
+            }
+
+            // Draw HUD (static overlay that shouldn't pan/zoom)
+            drawHUD();
+
+            // Loop
+            requestAnimationFrame(renderCamera);
+        }
+
+        function drawTankView() {
+            // Background grid pattern
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < canvas.width; i += 40) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, canvas.height);
+                ctx.stroke();
+            }
+            for (let j = 0; j < canvas.height; j += 40) {
+                ctx.beginPath();
+                ctx.moveTo(0, j);
+                ctx.lineTo(canvas.width, j);
+                ctx.stroke();
+            }
+
+            // Draw Tank borders
+            ctx.strokeStyle = videoFilter === 'thermal' ? '#1a237e' : 'rgba(79, 195, 247, 0.3)';
+            ctx.lineWidth = 4;
+            const tankX = 220;
+            const tankY = 60;
+            const tankW = 200;
+            const tankH = 240;
+
+            // Draw pipe inlet
+            ctx.fillStyle = videoFilter === 'thermal' ? '#4a148c' : '#1e2d3b';
+            ctx.fillRect(120, tankY + 20, 100, 20);
+            
+            // Draw tank body
+            ctx.beginPath();
+            ctx.moveTo(tankX, tankY);
+            ctx.lineTo(tankX, tankY + tankH);
+            ctx.lineTo(tankX + tankW, tankY + tankH);
+            ctx.lineTo(tankX + tankW, tankY);
+            ctx.stroke();
+
+            // Draw Gradations
+            ctx.fillStyle = videoFilter === 'nv' ? '#2ec471' : 'rgba(255, 255, 255, 0.4)';
+            ctx.font = '10px monospace';
+            ctx.textAlign = 'right';
+            for (let percent = 25; percent <= 100; percent += 25) {
+                const gy = tankY + tankH - (tankH * (percent / 100));
+                ctx.fillRect(tankX - 8, gy, 8, 1);
+                ctx.fillText(percent + '%', tankX - 12, gy + 3);
+            }
+
+            // Draw Water
+            const currentWaterHeight = tankH * (waterLevel / 100);
+            const waterY = tankY + tankH - currentWaterHeight;
+            
+            if (waterLevel > 0) {
+                ctx.save();
+                // Create clipping region to tank area
+                ctx.beginPath();
+                ctx.rect(tankX + 2, tankY, tankW - 4, tankH);
+                ctx.clip();
+
+                // Draw moving wave
+                ctx.beginPath();
+                ctx.moveTo(tankX, waterY);
+                const waveAmplitude = 5;
+                const waveFreq = 0.02;
+                for (let x = tankX; x <= tankX + tankW; x++) {
+                    const y = waterY + waveAmplitude * Math.sin((x * waveFreq) + (animFrame * 0.05));
+                    ctx.lineTo(x, y);
+                }
+                ctx.lineTo(tankX + tankW, tankY + tankH);
+                ctx.lineTo(tankX, tankY + tankH);
+                ctx.closePath();
+
+                if (videoFilter === 'thermal') {
+                    // Thermal water is cold (blue)
+                    let grad = ctx.createLinearGradient(0, waterY, 0, tankY + tankH);
+                    grad.addColorStop(0, '#0d47a1');
+                    grad.addColorStop(1, '#000033');
+                    ctx.fillStyle = grad;
+                } else if (videoFilter === 'nv') {
+                    ctx.fillStyle = 'rgba(46, 204, 113, 0.4)';
+                } else {
+                    let grad = ctx.createLinearGradient(0, waterY, 0, tankY + tankH);
+                    grad.addColorStop(0, 'rgba(128, 222, 234, 0.7)');
+                    grad.addColorStop(1, 'rgba(1, 87, 155, 0.8)');
+                    ctx.fillStyle = grad;
+                }
+                ctx.fill();
+                ctx.restore();
+            }
+
+            // Droplets animation (when flow rate > 0 and valve open)
+            if (valveOpen && flowRate > 0) {
+                if (animFrame % 8 === 0) {
+                    droplets.push({ x: 210, y: tankY + 30, vy: 3 + Math.random() * 2 });
+                }
+            }
+
+            // Draw droplets
+            ctx.fillStyle = videoFilter === 'thermal' ? '#ff9100' : (videoFilter === 'nv' ? '#2ec471' : '#80deea');
+            for (let i = droplets.length - 1; i >= 0; i--) {
+                const drop = droplets[i];
+                drop.y += drop.vy;
+                
+                ctx.beginPath();
+                ctx.arc(drop.x, drop.y, 3, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Collision with water level or bottom of tank
+                const collisionY = tankY + tankH - currentWaterHeight;
+                if (drop.y >= collisionY) {
+                    droplets.splice(i, 1);
+                }
+            }
+        }
+
+        function drawValveView() {
+            // Draw Pipes
+            const pipeY = 150;
+            const pipeH = 50;
+
+            ctx.fillStyle = videoFilter === 'thermal' ? '#15152a' : '#101d28';
+            ctx.fillRect(0, pipeY, canvas.width, pipeH);
+            
+            ctx.strokeStyle = videoFilter === 'thermal' ? '#3f51b5' : 'rgba(79, 195, 247, 0.3)';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(-10, pipeY, canvas.width + 20, pipeH);
+
+            // Valve housing in the middle
+            const valveX = canvas.width / 2 - 50;
+            const valveY = pipeY - 25;
+            const valveW = 100;
+            const valveH = 100;
+
+            // Draw Valve main body
+            ctx.fillStyle = videoFilter === 'thermal' ? '#263238' : '#223446';
+            ctx.strokeStyle = videoFilter === 'thermal' ? '#ff1744' : 'rgba(79, 195, 247, 0.5)';
+            ctx.fillRect(valveX, valveY, valveW, valveH);
+            ctx.strokeRect(valveX, valveY, valveW, valveH);
+
+            // Actuator coil (hot in thermal when active/open)
+            const coilX = valveX + 20;
+            const coilY = valveY - 30;
+            const coilW = 60;
+            const coilH = 30;
+            if (valveOpen) {
+                ctx.fillStyle = videoFilter === 'thermal' ? '#ff3d00' : '#4caf50'; // Hot orange / green
+            } else {
+                ctx.fillStyle = videoFilter === 'thermal' ? '#0d47a1' : '#e53935'; // Cold blue / red
+            }
+            ctx.fillRect(coilX, coilY, coilW, coilH);
+            ctx.strokeRect(coilX, coilY, coilW, coilH);
+
+            // Coil label
+            ctx.fillStyle = '#fff';
+            ctx.font = '8px monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText(valveOpen ? 'SOLENOID [ON]' : 'SOLENOID [OFF]', valveX + 50, coilY + 18);
+
+            // Status light indicator
+            ctx.beginPath();
+            ctx.arc(valveX + 50, valveY + 50, 8, 0, Math.PI * 2);
+            ctx.fillStyle = valveOpen ? '#4caf50' : '#e53935';
+            ctx.fill();
+            ctx.strokeStyle = '#fff';
+            ctx.stroke();
+
+            // Text Label
+            ctx.fillStyle = videoFilter === 'nv' ? '#2ec471' : 'rgba(255, 255, 255, 0.8)';
+            ctx.font = '10px monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText("VALVE_ACTUATOR_V12", valveX + 50, valveY + 80);
+
+            // Particles flow logic (when valve is open & flowing)
+            if (valveOpen && flowRate > 0) {
+                // Add new particle
+                if (animFrame % 4 === 0) {
+                    particles.push({
+                        x: 0,
+                        y: pipeY + 5 + Math.random() * (pipeH - 10),
+                        r: 2 + Math.random() * 3,
+                        v: 4 + (flowRate / 5)
+                    });
+                }
+            }
+
+            // Draw particles
+            ctx.fillStyle = videoFilter === 'thermal' ? '#ffd600' : (videoFilter === 'nv' ? '#2ec471' : '#80deea');
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.v;
+
+                // If valve is closed and particle is left of valve, stop it
+                if (!valveOpen && p.x >= valveX && p.x <= valveX + 10) {
+                    particles.splice(i, 1);
+                    continue;
+                }
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (p.x > canvas.width) {
+                    particles.splice(i, 1);
+                }
+            }
+        }
+
+        function applyVideoFilter() {
+            if (videoFilter === 'nv') {
+                // Night vision tint overlay
+                ctx.fillStyle = 'rgba(46, 204, 113, 0.12)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Add IR light focus effect
+                let irGrad = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, 50, canvas.width / 2, canvas.height / 2, 300);
+                irGrad.addColorStop(0, 'rgba(255,255,255,0.05)');
+                irGrad.addColorStop(1, 'rgba(0,0,0,0.6)');
+                ctx.fillStyle = irGrad;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            } else if (videoFilter === 'thermal') {
+                // FLIR mode overlay
+                ctx.fillStyle = 'rgba(49, 27, 146, 0.15)'; // Deep indigo tint
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            } else {
+                // Normal CCTV tint
+                ctx.fillStyle = 'rgba(79, 195, 247, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        function drawStaticNoise() {
+            const lines = Math.floor(staticIntensity * 12);
+            ctx.fillStyle = `rgba(255, 255, 255, ${staticIntensity * 0.35})`;
+            for (let i = 0; i < lines; i++) {
+                const h = Math.random() * 20;
+                const y = Math.random() * canvas.height;
+                ctx.fillRect(0, y, canvas.width, h);
+            }
+            
+            // Random dots
+            ctx.fillStyle = `rgba(128, 128, 128, ${staticIntensity * 0.25})`;
+            for (let i = 0; i < 50; i++) {
+                const rx = Math.random() * canvas.width;
+                const ry = Math.random() * canvas.height;
+                const rw = Math.random() * 4;
+                const rh = Math.random() * 4;
+                ctx.fillRect(rx, ry, rw, rh);
+            }
+        }
+
+        function drawHUD() {
+            // Update time
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            camTime.textContent = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+            // Check warning visibility based on actual sensor state
+            if (leakDetected) {
+                camAnomaly.style.display = 'block';
+                camAnomaly.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="margin-right: 8px;"></i>ANOMALY: LEAK DETECTED';
+            } else if (waterLevel >= 95) {
+                camAnomaly.style.display = 'block';
+                camAnomaly.innerHTML = '<i class="fa-solid fa-water" style="margin-right: 8px;"></i>WARNING: TANK OVERFLOW';
+            } else {
+                camAnomaly.style.display = 'none';
+            }
+        }
+
+        // --- MULTI-SCREEN NAVIGATION LOGIC ---
+        const screens = ['home', 'cctv', 'analytics', 'alerts', 'dev'];
+        
+        function switchScreen(screenName) {
+            screens.forEach(s => {
+                const screenEl = document.getElementById(`screen-${s}`);
+                const navEl = document.getElementById(`nav-${s}`);
+                if (screenEl && navEl) {
+                    if (s === screenName) {
+                        screenEl.classList.add('active');
+                        navEl.classList.add('active');
+                    } else {
+                        screenEl.classList.remove('active');
+                        navEl.classList.remove('active');
+                    }
+                }
+            });
+            
+            // Add static visual glitch effect on CCTV tab switch
+            if (screenName === 'cctv') {
+                staticIntensity = 0.6;
+            } else {
+                // Stop webcam stream tracks or pause file playing if navigating away from CCTV tab
+                stopWebcam();
+                if (webcamVideo) {
+                    webcamVideo.pause();
+                }
+                if (webcamSourceControl) webcamSourceControl.style.display = 'none';
+                
+                // Reset camera back to cam1 when switching tabs
+                if (activeCam === 'cam3') {
+                    activeCam = 'cam1';
+                    if (cam1Tab && cam2Tab && cam3Tab) {
+                        cam1Tab.style.backgroundColor = 'var(--primary-color)';
+                        cam1Tab.style.color = '#0b1218';
+                        cam2Tab.style.backgroundColor = '#37474f';
+                        cam2Tab.style.color = 'white';
+                        cam3Tab.style.backgroundColor = '#37474f';
+                        cam3Tab.style.color = 'white';
+                    }
+                }
+            }
+        }
+        
+        // Bind bottom navigation click event listeners
+        screens.forEach(s => {
+            const navEl = document.getElementById(`nav-${s}`);
+            if (navEl) {
+                navEl.addEventListener('click', () => switchScreen(s));
+            }
+        });
+
+        // Update simulated time in status bar
+        function updateStatusBarTime() {
+            const timeEl = document.getElementById('status-bar-time');
+            if (timeEl) {
+                const now = new Date();
+                const hh = String(now.getHours()).padStart(2, '0');
+                const mm = String(now.getMinutes()).padStart(2, '0');
+                timeEl.textContent = `${hh}:${mm}`;
+            }
+        }
+        updateStatusBarTime();
+        setInterval(updateStatusBarTime, 30000);
+
+        // --- LIVE WEBCAM IMPLEMENTATION ---
+        function startWebcam() {
+            webcamActive = true;
+            webcamError = false;
+            
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 350 } })
+                    .then(stream => {
+                        if (activeCam === 'cam3' && webcamActive && videoSourceMode === 'webcam') {
+                            webcamStream = stream;
+                            webcamVideo.src = '';
+                            webcamVideo.srcObject = stream;
+                            webcamVideo.play().catch(err => {
+                                console.error("Video play failed:", err);
+                            });
+                            addLog("Live Webcam stream connected successfully.", "success");
+                        } else {
+                            stream.getTracks().forEach(track => track.stop());
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Webcam access error:", err);
+                        addLog("Webcam access denied. Connecting to fallback live stream...", "warn");
+                        loadFallbackVideoStream();
+                    });
+            } else {
+                addLog("Webcam API not supported. Connecting to fallback live stream...", "warn");
+                loadFallbackVideoStream();
+            }
+        }
+
+        function loadFallbackVideoStream() {
+            webcamActive = true;
+            webcamError = false;
+            
+            // Public high-quality loop of flowing water (perfect for Aqua Guard!)
+            const fallbackUrl = "https://assets.mixkit.co/videos/preview/mixkit-flow-of-water-under-a-small-bridge-34407-large.mp4";
+            
+            webcamVideo.srcObject = null;
+            webcamVideo.src = fallbackUrl;
+            webcamVideo.loop = true;
+            webcamVideo.muted = true; // Mute to satisfy browser autoplay policy
+            webcamVideo.play()
+                .then(() => {
+                    addLog("Live video feed connected (Fallback stream).", "info");
+                })
+                .catch(err => {
+                    console.error("Fallback video play failed:", err);
+                    webcamError = true; // Show test card if fallback fails
+                });
+        }
+
+        function stopWebcam() {
+            webcamActive = false;
+            if (webcamStream) {
+                webcamStream.getTracks().forEach(track => track.stop());
+                webcamStream = null;
+            }
+            if (webcamVideo) {
+                if (videoSourceMode === 'webcam') {
+                    webcamVideo.srcObject = null;
+                }
+            }
+        }
+
+        function loadLocalVideo(file) {
+            if (!file) return;
+            
+            stopWebcam();
+            
+            if (activeVideoUrl) {
+                URL.revokeObjectURL(activeVideoUrl);
+            }
+            
+            webcamActive = true;
+            webcamError = false;
+            
+            activeVideoUrl = URL.createObjectURL(file);
+            webcamVideo.srcObject = null;
+            webcamVideo.src = activeVideoUrl;
+            webcamVideo.loop = true;
+            webcamVideo.play()
+                .then(() => {
+                    addLog(`Successfully loaded video file: ${file.name}`, "success");
+                })
+                .catch(err => {
+                    console.error("Local video play failed:", err);
+                    webcamError = true;
+                    addLog("CCTV ERROR: Failed to play the selected video file.", "error");
+                });
+        }
+
+        let cctvFrame = 0;
+        function drawAnimatedCCTVFallback() {
+            cctvFrame++;
+            
+            // Clear background
+            ctx.fillStyle = '#050c12';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw grid lines
+            ctx.strokeStyle = 'rgba(79, 195, 247, 0.03)';
+            ctx.lineWidth = 1;
+            const gridSize = 40;
+            for (let x = 0; x < canvas.width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+            for (let y = 0; y < canvas.height; y += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+            
+            // Draw a big industrial water pipe in the center
+            ctx.fillStyle = '#1c2d3d';
+            ctx.fillRect(50, 130, 540, 90);
+            
+            // Highlight reflections on the pipe
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+            ctx.fillRect(50, 130, 540, 15);
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+            ctx.fillRect(50, 205, 540, 15);
+            
+            // Draw pipe joints/rings
+            ctx.fillStyle = '#37474f';
+            ctx.fillRect(120, 120, 15, 110);
+            ctx.fillRect(500, 120, 15, 110);
+            
+            // Draw flowing water inside a cutout glass section of the pipe!
+            ctx.fillStyle = '#0c1d28';
+            ctx.fillRect(200, 140, 240, 70);
+            ctx.strokeStyle = '#37474f';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(200, 140, 240, 70);
+            
+            // Draw animated flowing water waves inside the glass section
+            ctx.fillStyle = 'rgba(79, 195, 247, 0.25)';
+            ctx.beginPath();
+            ctx.moveTo(200, 210);
+            for (let x = 200; x <= 440; x += 5) {
+                const waveY = 175 + Math.sin((x / 20) + (cctvFrame / 5)) * 8;
+                ctx.lineTo(x, waveY);
+            }
+            ctx.lineTo(440, 210);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Draw animated bubbles inside the water flow
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            for (let i = 0; i < 15; i++) {
+                const bx = 200 + ((cctvFrame * 2 + i * 45) % 240);
+                const by = 150 + (Math.sin(bx / 10 + i) * 12) + 20;
+                const br = 1 + (i % 3);
+                ctx.beginPath();
+                ctx.arc(bx, by, br, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            // Draw animated impeller/flow wheel inside the glass pipe
+            ctx.save();
+            ctx.translate(320, 175);
+            ctx.rotate(cctvFrame * 0.08);
+            ctx.strokeStyle = 'var(--primary-color)';
+            ctx.lineWidth = 4;
+            // Draw 4 blades
+            for (let j = 0; j < 4; j++) {
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(0, -22);
+                ctx.stroke();
+                ctx.rotate(Math.PI / 2);
+            }
+            ctx.fillStyle = '#37474f';
+            ctx.beginPath();
+            ctx.arc(0, 0, 8, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+            
+            // Draw telemetry data overlays (changing dynamically!)
+            ctx.fillStyle = '#80deea';
+            ctx.font = 'bold 10px monospace';
+            ctx.textAlign = 'left';
+            
+            // Simulated sensor data
+            const flowRate = (12.0 + Math.sin(cctvFrame / 50) * 0.4).toFixed(2);
+            const pressure = (3.15 + Math.cos(cctvFrame / 30) * 0.05).toFixed(3);
+            const waterTemp = (23.8 + Math.sin(cctvFrame / 100) * 0.2).toFixed(1);
+            
+            ctx.fillText(`FLOW: ${flowRate} L/MIN`, 220, 80);
+            ctx.fillText(`PRES: ${pressure} BAR`, 220, 95);
+            ctx.fillText(`TEMP: ${waterTemp} C`, 220, 110);
+            
+            // Corner camera crosshair marks
+            ctx.strokeStyle = 'rgba(79, 195, 247, 0.3)';
+            ctx.lineWidth = 1.5;
+            // Top Left corner bracket
+            ctx.beginPath();
+            ctx.moveTo(30, 50); ctx.lineTo(30, 30); ctx.lineTo(50, 30);
+            ctx.stroke();
+            // Top Right
+            ctx.beginPath();
+            ctx.moveTo(610, 50); ctx.lineTo(610, 30); ctx.lineTo(590, 30);
+            ctx.stroke();
+            // Bottom Left
+            ctx.beginPath();
+            ctx.moveTo(30, 300); ctx.lineTo(30, 320); ctx.lineTo(50, 320);
+            ctx.stroke();
+            // Bottom Right
+            ctx.beginPath();
+            ctx.moveTo(610, 300); ctx.lineTo(610, 320); ctx.lineTo(590, 320);
+            ctx.stroke();
+            
+            // Center crosshair
+            ctx.beginPath();
+            ctx.moveTo(310, 175); ctx.lineTo(330, 175);
+            ctx.moveTo(320, 165); ctx.lineTo(320, 185);
+            ctx.stroke();
+            
+            // Live watermark
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+            ctx.fillRect(10, 50, 140, 20);
+            ctx.fillStyle = '#80deea';
+            ctx.font = '10px monospace';
+            ctx.fillText("LIVE WATER FLOW SIM", 18, 63);
+            
+            // Draw instructions helper overlay (subtle text at the bottom)
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+            ctx.font = '9px monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText("[ CLICK HERE OR CHOOSE 'VIDEO FILE' BELOW TO SELECT YOUR OWN CLIP ]", canvas.width / 2, 290);
+        }
+
+        function drawWebcamView() {
+            if (videoSourceMode === 'webcam' && webcamVideo && webcamVideo.readyState >= 2 && !webcamError && !webcamVideo.src) {
+                // Draw active video frames
+                ctx.drawImage(webcamVideo, 0, 0, canvas.width, canvas.height);
+                
+                // Overlay watermark
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+                ctx.fillRect(10, 50, 140, 20);
+                ctx.fillStyle = '#80deea';
+                ctx.font = '10px monospace';
+                ctx.textAlign = 'left';
+                ctx.fillText("LIVE WEBCAM STREAM", 18, 63);
+            } else if (videoSourceMode === 'file' && webcamVideo && (webcamVideo.readyState >= 2 || webcamVideo.src) && !webcamError) {
+                // Draw custom video file frames
+                ctx.drawImage(webcamVideo, 0, 0, canvas.width, canvas.height);
+                
+                // Overlay watermark
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+                ctx.fillRect(10, 50, 140, 20);
+                ctx.fillStyle = '#80deea';
+                ctx.font = '10px monospace';
+                ctx.textAlign = 'left';
+                ctx.fillText("LOCAL VIDEO FEED", 18, 63);
+            } else {
+                // Fallback to animated simulated CCTV water flow feed (guaranteed to render everywhere!)
+                drawAnimatedCCTVFallback();
+            }
+        }
+
+        // Bind source control toggles and file input listener
+        if (webcamSourceControl && btnSrcWebcam && btnSrcFile && videoFileInput) {
+            btnSrcWebcam.addEventListener('click', () => {
+                videoSourceMode = 'webcam';
+                btnSrcWebcam.style.backgroundColor = 'var(--primary-color)';
+                btnSrcWebcam.style.color = '#0b1218';
+                btnSrcFile.style.backgroundColor = '#37474f';
+                btnSrcFile.style.color = 'white';
+                
+                if (activeVideoUrl) {
+                    URL.revokeObjectURL(activeVideoUrl);
+                    activeVideoUrl = null;
+                }
+                webcamVideo.src = '';
+                
+                camName.textContent = 'CAM-03 // LIVE_WEBCAM_FEED';
+                startWebcam();
+            });
+            
+            btnSrcFile.addEventListener('click', () => {
+                videoSourceMode = 'file';
+                btnSrcFile.style.backgroundColor = 'var(--primary-color)';
+                btnSrcFile.style.color = '#0b1218';
+                btnSrcWebcam.style.backgroundColor = '#37474f';
+                btnSrcWebcam.style.color = 'white';
+                
+                stopWebcam();
+                videoFileInput.click();
+            });
+            
+            videoFileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    camName.textContent = `CAM-03 // ${file.name.toUpperCase().substring(0, 16)}`;
+                    loadLocalVideo(file);
+                }
+            });
+        }
+
+        // --- LOGIN PAGE LOGIC ---
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('demo') === 'true') {
+            sessionStorage.setItem('aqua_guard_logged_in', 'true');
+        }
+
+        // Check if user is already logged in (via sessionStorage)
+        if (sessionStorage.getItem('aqua_guard_logged_in') === 'true') {
+            loginView.style.display = 'none';
+            dashboardView.style.display = 'block';
+            
+            if (urlParams.get('demo') === 'true') {
+                switchScreen('cctv');
+                switchCamera('cam3');
+            } else {
+                switchScreen('home');
+            }
+        } else {
+            loginView.style.display = 'flex';
+            dashboardView.style.display = 'none';
+        }
+
+        // Email validation helper
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        // --- VALIDATION BINDINGS ---
+        // Login validation
+        function validateLoginForm() {
+            const emailVal = loginEmail.value.trim();
+            const passwordVal = loginPassword.value;
+            const valid = isValidEmail(emailVal) && passwordVal.length >= 6;
+            loginSubmitBtn.disabled = !valid;
+        }
+
+        loginEmail.addEventListener('input', validateLoginForm);
+        loginPassword.addEventListener('input', validateLoginForm);
+
+        // Register validation
+        function validateRegisterForm() {
+            const nameVal = registerName.value.trim();
+            const emailVal = registerEmail.value.trim();
+            const passwordVal = registerPassword.value;
+            const valid = nameVal.length > 0 && isValidEmail(emailVal) && passwordVal.length >= 6;
+            registerSubmitBtn.disabled = !valid;
+        }
+
+        registerName.addEventListener('input', validateRegisterForm);
+        registerEmail.addEventListener('input', validateRegisterForm);
+        registerPassword.addEventListener('input', validateRegisterForm);
+
+        // Forgot password validation
+        function validateForgotForm() {
+            const emailVal = forgotEmail.value.trim();
+            const valid = isValidEmail(emailVal);
+            forgotSubmitBtn.disabled = !valid;
+        }
+
+        forgotEmail.addEventListener('input', validateForgotForm);
+
+        // --- PASSWORD VISIBILITY TOGGLERS ---
+        // Login password toggle
+        let passwordVisible = false;
+        loginTogglePassword.addEventListener('click', () => {
+            passwordVisible = !passwordVisible;
+            if (passwordVisible) {
+                loginPassword.type = 'text';
+                loginTogglePassword.innerHTML = '<i class="fa-solid fa-eye"></i>';
+            } else {
+                loginPassword.type = 'password';
+                loginTogglePassword.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+            }
+        });
+
+        // Register password toggle
+        let regPasswordVisible = false;
+        registerTogglePassword.addEventListener('click', () => {
+            regPasswordVisible = !regPasswordVisible;
+            if (regPasswordVisible) {
+                registerPassword.type = 'text';
+                registerTogglePassword.innerHTML = '<i class="fa-solid fa-eye"></i>';
+            } else {
+                registerPassword.type = 'password';
+                registerTogglePassword.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+            }
+        });
+
+        // --- VIEW SWITCHING TRANSTIONS ---
+        function switchAuthScreen(screenName) {
+            // Hide messages
+            loginError.style.display = 'none';
+
+            // Determine active forms and texts
+            const forms = [loginForm, registerForm, forgotForm];
+            let targetForm;
+            let titleText;
+            let subtitleText;
+
+            if (screenName === 'login') {
+                targetForm = loginForm;
+                titleText = "Aqua Guard";
+                subtitleText = "Smart Water Management System";
+            } else if (screenName === 'register') {
+                targetForm = registerForm;
+                titleText = "Create Account";
+                subtitleText = "Join Aqua Guard to save water together";
+            } else if (screenName === 'forgot') {
+                targetForm = forgotForm;
+                titleText = "Reset Password";
+                subtitleText = "Enter your email to receive a reset link";
+            }
+
+            // Animate card swap
+            const card = document.querySelector('.login-card');
+            card.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+            card.style.opacity = '0.3';
+            card.style.transform = 'scale(0.97)';
+
+            setTimeout(() => {
+                // Swap visibility
+                forms.forEach(f => f.style.display = 'none');
+                targetForm.style.display = 'block';
+
+                // Update headers
+                authTitle.textContent = titleText;
+                authSubtitle.textContent = subtitleText;
+
+                // Reset forms
+                loginEmail.value = '';
+                loginPassword.value = '';
+                registerName.value = '';
+                registerEmail.value = '';
+                registerPassword.value = '';
+                forgotEmail.value = '';
+                
+                validateLoginForm();
+                validateRegisterForm();
+                validateForgotForm();
+
+                // Fade back in
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        // Navigation listeners
+        linkForgotPassword.addEventListener('click', (e) => { e.preventDefault(); switchAuthScreen('forgot'); });
+        linkToRegister.addEventListener('click', (e) => { e.preventDefault(); switchAuthScreen('register'); });
+        linkToLoginFromReg.addEventListener('click', (e) => { e.preventDefault(); switchAuthScreen('login'); });
+        linkToLoginFromForgot.addEventListener('click', (e) => { e.preventDefault(); switchAuthScreen('login'); });
+
+        // --- SUBMIT HANDLERS ---
+        // Login submit
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+            
+            loginEmail.disabled = true;
+            loginPassword.disabled = true;
+            loginTogglePassword.disabled = true;
+            loginSubmitBtn.disabled = true;
+            
+            loginBtnText.style.display = 'none';
+            loginBtnSpinner.style.display = 'block';
+            
+            setTimeout(() => {
+                const emailVal = loginEmail.value.trim();
+                const passwordVal = loginPassword.value;
+                
+                if (emailVal === 'admin@aquaguard.com' && passwordVal === 'admin123') {
+                    sessionStorage.setItem('aqua_guard_logged_in', 'true');
+                    
+                    loginView.style.opacity = '0';
+                    loginView.style.transform = 'scale(1.05)';
+                    
+                    setTimeout(() => {
+                        loginView.style.display = 'none';
+                        dashboardView.style.display = 'block';
+                        dashboardView.style.opacity = '0';
+                        dashboardView.style.transition = 'opacity 0.5s ease';
+                        
+                        dashboardView.offsetHeight;
+                        dashboardView.style.opacity = '1';
+                        
+                        loginEmail.value = '';
+                        loginPassword.value = '';
+                        loginEmail.disabled = false;
+                        loginPassword.disabled = false;
+                        loginTogglePassword.disabled = false;
+                        loginBtnText.style.display = 'block';
+                        loginBtnSpinner.style.display = 'none';
+                        switchScreen('home');
+                    }, 400);
+                } else {
+                    loginError.textContent = "Invalid email address or password. Try admin@aquaguard.com / admin123";
+                    loginError.style.display = 'block';
+                    
+                    loginEmail.disabled = false;
+                    loginPassword.disabled = false;
+                    loginTogglePassword.disabled = false;
+                    loginSubmitBtn.disabled = false;
+                    loginBtnText.style.display = 'block';
+                    loginBtnSpinner.style.display = 'none';
+                }
+            }, 1200);
+        });
+
+        // Register submit
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+
+            registerName.disabled = true;
+            registerEmail.disabled = true;
+            registerPassword.disabled = true;
+            registerTogglePassword.disabled = true;
+            registerSubmitBtn.disabled = true;
+
+            registerBtnText.style.display = 'none';
+            registerBtnSpinner.style.display = 'block';
+
+            setTimeout(() => {
+                // Success simulation message
+                loginSuccess.textContent = "Account created successfully! Please sign in.";
+                loginSuccess.style.display = 'block';
+
+                registerName.disabled = false;
+                registerEmail.disabled = false;
+                registerPassword.disabled = false;
+                registerTogglePassword.disabled = false;
+                registerBtnText.style.display = 'block';
+                registerBtnSpinner.style.display = 'none';
+
+                // Switch back to login view
+                switchAuthScreen('login');
+            }, 1200);
+        });
+
+        // Forgot password submit
+        forgotForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+
+            const userEmail = forgotEmail.value.trim();
+            forgotEmail.disabled = true;
+            forgotSubmitBtn.disabled = true;
+
+            forgotBtnText.style.display = 'none';
+            forgotBtnSpinner.style.display = 'block';
+
+            setTimeout(() => {
+                // Success simulation message
+                loginSuccess.textContent = `A reset link was sent to ${userEmail} (simulated).`;
+                loginSuccess.style.display = 'block';
+
+                forgotEmail.disabled = false;
+                forgotBtnText.style.display = 'block';
+                forgotBtnSpinner.style.display = 'none';
+
+                // Switch back to login view
+                switchAuthScreen('login');
+            }, 1200);
+        });
+
+        // Logout Event Listener
+        btnLogout.addEventListener('click', () => {
+            sessionStorage.removeItem('aqua_guard_logged_in');
+            
+            dashboardView.style.opacity = '0';
+            setTimeout(() => {
+                dashboardView.style.display = 'none';
+                loginView.style.display = 'flex';
+                loginView.style.opacity = '0';
+                loginView.style.transform = 'scale(0.95)';
+                
+                loginView.offsetHeight;
+                
+                loginView.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                loginView.style.opacity = '1';
+                loginView.style.transform = 'scale(1)';
+                validateLoginForm();
+            }, 300);
+        });
+
+        // Initialize Render Loop
+        renderCamera();
+    </script>
+</body>
+</html>
