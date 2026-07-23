@@ -8,7 +8,7 @@ on:
 
 jobs:
   run-appium-tests:
-    runs-on: macos-13 # macos runs support hardware acceleration for android emulators
+    runs-on: ubuntu-latest # ubuntu runs support KVM virtualization for android emulators
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4

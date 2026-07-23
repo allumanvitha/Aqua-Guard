@@ -97,6 +97,33 @@ Reports are automatically compiled on completion of a run and saved in the corre
 
 Automated workflows are configured in `.github/workflows/` at the repository root:
 1. **`selenium-tests.yml`**: Triggers on push/pull request to verify web console stability.
-2. **`appium-tests.yml`**: Spins up a macOS virtual machine with hardware acceleration, builds the Android APK, starts an Android Emulator, starts the Appium Server, and runs Appium tests.
+2. **`appium-tests.yml`**: Spins up an Ubuntu runner utilizing native KVM hardware acceleration, builds the Android APK, boots up a headless Android Emulator, starts the Appium Server, and executes Appium tests.
 3. **`report.yml`**: Triggered on pushing to `main` branch. It executes both Selenium and Appium suites, aggregates Excel/HTML/CSV/JSON/XML report archives, builds a consolidated dashboard, and deploys it live to **GitHub Pages**.
 4. **`web-e2e.yml` / `mobile-e2e.yml`**: Allows manual trigger of integration test runs.
+
+---
+
+## Configuring a Self-Hosted Runner (Optional)
+
+If you prefer to run Appium tests on a local machine (for much faster emulator boot times, full GUI rendering, or to avoid GitHub VM queues), you can easily set up a GitHub Self-Hosted Runner:
+
+### Step 1: Add Runner in GitHub
+1. Go to your repository on GitHub.
+2. Click **Settings** > **Actions** > **Runners**.
+3. Click **New self-hosted runner**.
+4. Select your runner OS (Windows / macOS / Linux) and follow the downloaded terminal commands to download and configure the runner package.
+
+### Step 2: Configure Workflows to Use Self-Hosted Runner
+Edit the runner tag in the workflow YAML files (e.g., `.github/workflows/appium-tests.yml`):
+```yaml
+jobs:
+  run-appium-tests:
+    runs-on: self-hosted
+```
+
+### Step 3: Local Environment Setup
+Ensure the self-hosted machine has:
+- **Java JDK 17** (and `JAVA_HOME` configured)
+- **Node.js** & **Appium**
+- **Android SDK** (with `ANDROID_HOME` environment variable configured)
+- An active Android Emulator running, or allow the runner to spin up the emulator using the configured headless options.
