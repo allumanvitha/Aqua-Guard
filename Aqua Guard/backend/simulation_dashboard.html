@@ -4,6 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aqua Guard - Smart Water Simulation</title>
+    <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+        var errorDiv = document.createElement('div');
+        errorDiv.style.position = 'fixed';
+        errorDiv.style.top = '0';
+        errorDiv.style.left = '0';
+        errorDiv.style.width = '100%';
+        errorDiv.style.background = '#e53935';
+        errorDiv.style.color = '#ffffff';
+        errorDiv.style.zIndex = '999999';
+        errorDiv.style.padding = '24px';
+        errorDiv.style.fontSize = '15px';
+        errorDiv.style.fontFamily = 'monospace';
+        errorDiv.style.lineHeight = '1.5';
+        errorDiv.style.whiteSpace = 'pre-wrap';
+        errorDiv.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+        errorDiv.innerText = '⚠️ JAVASCRIPT EXCEPTION ENCOUNTERED:\n\n' + 
+                             'Message: ' + message + '\n' +
+                             'Line: ' + lineno + '\n' +
+                             'Source: ' + source + '\n\n' +
+                             (error && error.stack ? 'Stack Trace:\n' + error.stack : 'No stack trace available.');
+        document.body.appendChild(errorDiv);
+        return false;
+    };
+    </script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->

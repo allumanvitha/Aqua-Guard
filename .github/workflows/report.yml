@@ -1,0 +1,133 @@
+name: Run Tests and Publish Report
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  test-and-generate-report:
+    runs-on: macos-13
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Appium & Driver
+        run: |
+          npm install -g appium
+          appium driver install uiautomator2
+
+      - name: Run Selenium Tests (Headless)
+        run: |
+          cd "Aqua Guard/automation"
+          mvn test -Dtest=AuthSeleniumTests,DashboardSeleniumTests,DeviceAdminSeleniumTests,ReportsSeleniumTests,FirebaseConsoleSeleniumTests
+        continue-on-error: true # Ensure we still run Appium and generate reports if Selenium fails
+
+      - name: Build Android App for Testing
+        run: |
+          cd "Aqua Guard/frontend"
+          chmod +x gradlew
+          ./gradlew assembleDebug
+        continue-on-error: true
+
+      - name: Run Appium Tests in Android Emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 33
+          target: google_apis
+          arch: x86_64
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: |
+            appium --log automation-appium-server.log &
+            sleep 10
+            cd "Aqua Guard/automation"
+            mvn test -Dtest=AuthAppiumTests,DashboardAppiumTests,DeviceAppiumTests,MonitoringAppiumTests,SystemAppiumTests,PerformanceAppiumTests
+        continue-on-error: true
+
+      - name: Prepare GH-Pages Directory structure
+        run: |
+          mkdir -p public-reports
+          mkdir -p public-reports/selenium
+          mkdir -p public-reports/appium
+          
+          # Copy Selenium reports if they exist
+          if [ -d "Aqua Guard/automation/selenium/reports" ]; then
+            cp -r "Aqua Guard/automation/selenium/reports/"* public-reports/selenium/
+          fi
+          
+          # Copy Appium reports if they exist
+          if [ -d "Aqua Guard/automation/appium/reports" ]; then
+            cp -r "Aqua Guard/automation/appium/reports/"* public-reports/appium/
+          fi
+          
+          # Create HTML dashboard index
+          cat << 'EOF' > public-reports/index.html
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <title>Aqua Guard QA Automation Hub</title>
+              <style>
+                  body { font-family: 'Inter', sans-serif; background-color: #0b1218; color: #ffffff; text-align: center; padding: 50px; }
+                  h1 { color: #2196f3; }
+                  .container { display: flex; justify-content: center; gap: 40px; margin-top: 50px; }
+                  .card { background: #121e2d; padding: 40px; border-radius: 12px; width: 300px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); text-decoration: none; color: white; border: 1px solid #1fffffff; transition: transform 0.2s; }
+                  .card:hover { transform: scale(1.05); border-color: #2196f3; }
+                  .card h2 { color: #2196f3; margin-top: 0; }
+                  .card p { color: #80ffffff; font-size: 14px; }
+              </style>
+          </head>
+          <body>
+              <h1>Aqua Guard QA Automation Framework Reports</h1>
+              <p>Select a test execution report dashboard below:</p>
+              <div class="container">
+                  <a class="card" href="selenium/TestReport.html">
+                      <h2>Selenium Web Reports</h2>
+                      <p>View Web dashboard, Firebase Console, and Reports tests results.</p>
+                  </a>
+                  <a class="card" href="appium/TestReport.html">
+                      <h2>Appium Mobile Reports</h2>
+                      <p>View Android native app E2E regression results.</p>
+                  </a>
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload Report Directory Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public-reports/
+
+  deploy-reports-pages:
+    needs: test-and-generate-report
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

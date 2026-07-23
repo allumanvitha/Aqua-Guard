@@ -1,4 +1,8 @@
 [versions]
+appcompat = "1.6.1"
+material = "1.11.0"
+constraintlayout = "2.1.4"
+navigation = "2.7.7"
 agp = "8.3.1"
 kotlin = "1.9.22"
 coreKtx = "1.12.0"
@@ -19,6 +23,11 @@ materialIconsExtended = "1.6.3"
 coilCompose = "2.6.0"
 
 [libraries]
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigation" }
+androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigation" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -67,7 +76,7 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-google-services = { id = "com.google.gms.google-services", version.ref = "agp" } # aligned with AGP or 4.4.1
+google-services = { id = "com.google.gms.google-services", version = "4.4.1" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 # Custom configuration for Google Services
 googleServicesPlugin = { id = "com.google.gms.google-services", version = "4.4.1" }

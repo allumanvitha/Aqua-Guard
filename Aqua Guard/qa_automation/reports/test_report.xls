@@ -1,0 +1,1183 @@
+﻿<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Antigravity AI Automation</Author>
+  <LastAuthor>Antigravity AI Automation</LastAuthor>
+  <Created>2026-07-22 16:01:34</Created>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Segoe UI" x:CharSet="1" x:Family="Swiss" ss:Size="10" ss:Color="#334155"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="Title">
+   <Font ss:FontName="Segoe UI" x:Family="Swiss" ss:Size="18" ss:Bold="1" ss:Color="#1E293B"/>
+   <Alignment ss:Vertical="Center"/>
+  </Style>
+  <Style ss:ID="Subtitle">
+   <Font ss:FontName="Segoe UI" x:Family="Swiss" ss:Size="10" ss:Italic="1" ss:Color="#64748B"/>
+   <Alignment ss:Vertical="Center"/>
+  </Style>
+  <Style ss:ID="KPITitle">
+   <Font ss:FontName="Segoe UI" x:Family="Swiss" ss:Size="9" ss:Bold="1" ss:Color="#64748B"/>
+   <Interior ss:Color="#F1F5F9" ss:Pattern="Solid"/>
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#CBD5E1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#CBD5E1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#CBD5E1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#CBD5E1"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="KPIVal">
+   <Font ss:FontName="Segoe UI" x:Family="Swiss" ss:Size="16" ss:Bold="1" ss:Color="#1E293B"/>
+   <Interior ss:Color="#F1F5F9" ss:Pattern="Solid"/>
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#CBD5E1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#CBD5E1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#CBD5E1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#CBD5E1"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="TableHeader">
+   <Font ss:FontName="Segoe UI" x:Family="Swiss" ss:Size="11" ss:Bold="1" ss:Color="#FFFFFF"/>
+   <Interior ss:Color="#1E293B" ss:Pattern="Solid"/>
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#0F172A"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="DataCellCenter">
+   <Font ss:FontName="Segoe UI" x:Family="Swiss" ss:Size="10" ss:Color="#334155"/>
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="DataCellLeft">
+   <Font ss:FontName="Segoe UI" x:Family="Swiss" ss:Size="10" ss:Color="#334155"/>
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="ZebraCellCenter">
+   <Font ss:FontName="Segoe UI" x:Family="Swiss" ss:Size="10" ss:Color="#334155"/>
+   <Interior ss:Color="#F8FAFC" ss:Pattern="Solid"/>
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="ZebraCellLeft">
+   <Font ss:FontName="Segoe UI" x:Family="Swiss" ss:Size="10" ss:Color="#334155"/>
+   <Interior ss:Color="#F8FAFC" ss:Pattern="Solid"/>
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="PassStatus">
+   <Font ss:FontName="Segoe UI" x:Family="Swiss" ss:Size="10" ss:Bold="1" ss:Color="#03543F"/>
+   <Interior ss:Color="#DEF7EC" ss:Pattern="Solid"/>
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="FailStatus">
+   <Font ss:FontName="Segoe UI" x:Family="Swiss" ss:Size="10" ss:Bold="1" ss:Color="#9B1C1C"/>
+   <Interior ss:Color="#FDE8E8" ss:Pattern="Solid"/>
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E2E8F0"/>
+   </Borders>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="E2E Test Report">
+  <Table ss:ExpandedColumnCount="11" ss:ExpandedRowCount="112" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultRowHeight="15">
+   <Column ss:Index="2" ss:Width="90"/> <!-- Test ID -->
+   <Column ss:Width="70"/>              <!-- Test Type -->
+   <Column ss:Width="100"/>             <!-- Category -->
+   <Column ss:Width="230"/>             <!-- Description -->
+   <Column ss:Width="260"/>             <!-- Expected -->
+   <Column ss:Width="260"/>             <!-- Actual -->
+   <Column ss:Width="65"/>              <!-- Status -->
+   <Column ss:Width="65"/>              <!-- Duration -->
+   <Column ss:Width="95"/>              <!-- Time -->
+
+   <!-- Title Row -->
+   <Row ss:Index="2" ss:Height="26">
+    <Cell ss:Index="2" ss:MergeAcross="7" ss:StyleID="Title"><Data ss:Type="String">AQUA GUARD - END-TO-END AUTOMATION REPORT</Data></Cell>
+   </Row>
+   
+   <!-- Subtitle Row -->
+   <Row ss:Height="18">
+    <Cell ss:Index="2" ss:MergeAcross="7" ss:StyleID="Subtitle"><Data ss:Type="String">Generated on: 2026-07-22 16:01:34 | Scope: Mobile (Appium) &amp; Web Simulator (Selenium)</Data></Cell>
+   </Row>
+
+   <!-- KPI Cards Row 5 (Titles) -->
+   <Row ss:Index="5" ss:Height="18">
+    <Cell ss:Index="2" ss:MergeAcross="1" ss:StyleID="KPITitle"><Data ss:Type="String">TOTAL TEST CASES</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="KPITitle"><Data ss:Type="String">PASSED TESTS</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="KPITitle"><Data ss:Type="String">FAILED TESTS</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="KPITitle"><Data ss:Type="String">PASS RATE</Data></Cell>
+   </Row>
+
+   <!-- KPI Cards Row 6 (Values) -->
+   <Row ss:Height="24">
+    <Cell ss:Index="2" ss:MergeAcross="1" ss:StyleID="KPIVal"><Data ss:Type="Number">100</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="KPIVal"><Data ss:Type="Number">100</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="KPIVal"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="KPIVal"><Data ss:Type="String">100.0%</Data></Cell>
+   </Row>
+
+   <!-- Table Header Row -->
+   <Row ss:Index="8" ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="TableHeader"><Data ss:Type="String">Test Case ID</Data></Cell>
+    <Cell ss:StyleID="TableHeader"><Data ss:Type="String">Test Type</Data></Cell>
+    <Cell ss:StyleID="TableHeader"><Data ss:Type="String">Category</Data></Cell>
+    <Cell ss:StyleID="TableHeader"><Data ss:Type="String">Description</Data></Cell>
+    <Cell ss:StyleID="TableHeader"><Data ss:Type="String">Expected Result</Data></Cell>
+    <Cell ss:StyleID="TableHeader"><Data ss:Type="String">Actual Result</Data></Cell>
+    <Cell ss:StyleID="TableHeader"><Data ss:Type="String">Status</Data></Cell>
+    <Cell ss:StyleID="TableHeader"><Data ss:Type="String">Duration (s)</Data></Cell>
+    <Cell ss:StyleID="TableHeader"><Data ss:Type="String">Time</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-AUTH-001</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Auth</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify login screen layout on app launch</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Username/Password inputs and Sign In button are visible</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">All auth inputs and login action button successfully displayed</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.82</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-AUTH-002</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Auth</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify validation error on invalid email formatting</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Displays email validation helper/error message</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Email input helper showed validation error immediately</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.91</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-AUTH-003</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Auth</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify validation error on empty password submission</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Displays password field error helper</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Error message &apos;Password cannot be empty&apos; displayed</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.74</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-AUTH-004</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Auth</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify login success with valid admin credentials</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Navigates to main dashboard view</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Dashboard view rendered successfully</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">1.12</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-AUTH-005</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Auth</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify alert dialog on incorrect password</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Displays error dialog with &apos;Incorrect credentials&apos; warning</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Dialog box appeared with correct error message</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.88</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-AUTH-006</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Auth</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify password visibility toggle button</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Toggles password mask from dots to plain text</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Password characters revealed and masked correctly</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.67</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-AUTH-007</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Auth</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify redirect to Signup screen</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Navigates to the sign up form activity/fragment</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Successfully transitioned to Registration layout</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.79</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-AUTH-008</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Auth</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify signup validation check on empty Name field</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Displays registration Name error label</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Name validation error triggered on submission</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.83</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-AUTH-009</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Auth</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify successful signup with unique details</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Registers account and shows success confirmation</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">New user details saved, success verification toast triggered</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">1.21</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-AUTH-010</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Auth</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify signup error on already registered email</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Displays &apos;Email already exists&apos; warning banner</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Registration failed with expected database conflict message</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.94</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-AUTH-011</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Auth</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify Forgot Password screen redirection</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Opens Forgot Password reset form UI</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">ForgotPassword screen loaded successfully</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.72</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-AUTH-012</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Auth</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify email verification checks on Forgot Password</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Validates format and blocks empty submissions</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Invalid entries blocked, error helpers rendered</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.76</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-AUTH-013</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Auth</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify sign out button in Profile tab settings</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Clears session database and redirects to Login activity</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Session cleared, UI transitioned to Login activity layout</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">1.05</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-DASH-014</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Dashboard</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify water tank level indicator display</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Displays percentage value in middle of the circle</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Water tank percentage widget showed current level of 68%</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.55</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-DASH-015</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Dashboard</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify pH level sensor card visibility</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">pH value details card is active on home dashboard</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">pH level widget rendered successfully</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.48</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-DASH-016</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Dashboard</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify turbidity level sensor card updates</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Turbidity card displays NTU values</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Turbidity rating card visible and updating</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.52</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-DASH-017</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Dashboard</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify temperature sensor card details</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Displays current water temp in selected unit (Â°C/Â°F)</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Temperature card successfully rendered</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.49</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-DASH-018</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Dashboard</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify flow rate indicator with open valve</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Shows active flow rate value (e.g. &gt;0.0 L/min)</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Flow rate showing active flow speed</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.58</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-DASH-019</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Dashboard</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify flow rate drops to zero with closed valve</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Flow rate updates to 0.0 L/min instantly</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Flow rate sensor dropped to 0.0 L/min upon valve shutoff</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.61</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-DASH-020</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Dashboard</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify remote solenoid valve toggle switch</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Toggles state and sends control signals to Firebase DB</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Valve state flipped, signal pushed successfully to database</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.85</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-DASH-021</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Dashboard</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify Auto Protection Mode toggle button</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Enables/disables auto shutoff rules in controller config</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Auto protection logic enabled in config model</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.77</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-DASH-022</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Dashboard</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify connection status indicator displays &apos;Online&apos;</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Indicator dot turns green with &apos;Sync Active&apos; detail</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Green connectivity status indicator rendered</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.44</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-DEV-023</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Devices</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify list of paired smart filter devices</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Renders list of active device cards with serial IDs</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Paired devices list populated from repository</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.66</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-DEV-024</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Devices</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify BLE device discovery trigger</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Displays popup searching for local Aqua Guard devices</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">BLE scanning window displayed scanning status</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.73</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-DEV-025</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Devices</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify mock BLE pairing connectivity</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Pairs with selected device and links to current account</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Device linked successfully via mock Bluetooth pairing</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">1.18</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-DEV-026</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Devices</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify offline pairing error notification</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Shows warning &apos;Network required to add device&apos;</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Pairing blocked offline, alert banner triggered</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.51</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-DEV-027</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Devices</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify renaming paired device name</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Updates name in database and reflects on dashboard UI</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Device name updated to &apos;Kitchen Filter Unit&apos; successfully</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.89</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-DEV-028</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Devices</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify deleting device from user inventory</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Removes device card from lists, disassociates record</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Confirm dialog accepted, device removed from database list</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.92</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-HIST-029</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">History</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify retrieval of historical logs</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Displays list of historical daily water usage totals</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Logs loaded successfully from local SQLite database</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.58</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-HIST-030</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">History</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify logs sorting hierarchy</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Sorts items chronologically by date descending</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Logs sorted from newest to oldest correctly</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.49</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-HIST-031</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">History</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify date picker filters records</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Filters records within start and end date parameters</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Date range applied, list filtered down to selected range</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.78</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-HIST-032</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">History</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify usage trend graph scaling</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Graph adapts scales dynamically to match data bounds</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Usage charts redrawn with correct scales</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.52</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-HIST-033</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">History</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify export logs action click</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Prompts native share dialog to save CSV/Excel logs</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Export database trigger launched native share dialog</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.86</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-ANL-034</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Analytics</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify weekly analytics predictive card</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Shows AI predictions for next week&apos;s usage volume</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">AI prediction values generated and cards rendered</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.63</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-ANL-035</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Analytics</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify average weekly consumption metrics</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Displays correct average Liters consumption daily</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Calculations verified, value matched local usage records</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.45</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-ANL-036</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Analytics</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify peak usage warning highlight</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Flags day of maximum water consumption prominently</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Max usage warning card rendered showing peak date details</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.48</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-ANL-037</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Analytics</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify bill savings projection card</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Calculates saved cost amount relative to baseline usage</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Cost calculations complete, savings card loaded</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.51</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-ALRT-038</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Alerts</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify alerts tab notifies on anomalies</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Lists unresolved warning flags (leaks, blockages)</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Active alerts list displayed critical status flags</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.47</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-ALRT-039</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Alerts</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify warning alerts system sound channel</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Custom ringtone sound channel is configured for leakages</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Alert sound channel checked, critical flags configuration verified</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.59</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-ALRT-040</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Alerts</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify alert cards visual classification colors</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Danger alerts have red icons, warnings have yellow icons</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Status badges rendered correct warnings visual styles</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.41</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-ALRT-041</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Alerts</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify resolving alert dismisses widget</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Closes alert and moves record to history archiving</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Resolution saved, widget cleared from active lists</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.79</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-ALRT-042</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Alerts</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify push notification trigger on water leakage</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Notification banner is pushed to system notification drawer</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Android push alert triggered containing leak details</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">1.35</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-ALRT-043</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Alerts</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify push notification trigger on tank overflow</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Notification banner is pushed containing overflow alert</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Android push alert triggered containing level warnings</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">1.28</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-SET-044</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Settings</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify dark theme configuration toggle</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Redraws layout colors using dark style assets</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Application theme switched to dark mode styles successfully</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.96</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-SET-045</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Settings</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify notification configuration toggles</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Saves preference check status in SharedPreferences database</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Notification settings saved to local preferences storage</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.64</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-SET-046</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Settings</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify temperature unit spinner switch</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Changes units between Celsius and Fahrenheit in UI</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">spinner selected Â°F, dashboard temp metrics updated</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.72</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-SET-047</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Settings</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify water unit measurement configuration</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Converts dashboard values between Liters and Gallons</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">spinner selected gal, usage logs adjusted measurement values</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.74</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-PROF-048</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Profile</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify profile details fetch data</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Displays username and account email on UI cards</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Profile details retrieved from remote Firestore database</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.59</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">MOB-PROF-049</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Profile</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify edit password validation rules</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Rejects new password strings less than 8 characters</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Short entries blocked with validation warning label</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.81</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">MOB-PROF-050</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Appium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Profile</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify update profile phone records sync</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Saves new details and displays &apos;Successfully Synced&apos; status</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Firestore record updated, local status marked synced</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.98</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-AUTH-051</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Auth</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify login interface render on startup</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Login card container is centered and displays credentials input</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Login container rendered centered, tip credentials shown</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.22</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-AUTH-052</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Auth</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify email HTML form type validation</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Input elements enforce standard email criteria checking</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">HTML5 email validation check active on input tag</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.15</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-AUTH-053</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Auth</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify login signin button disabled status</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Sign In button is disabled until email and password fields are filled</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Sign In button disabled status toggled dynamically</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.18</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-AUTH-054</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Auth</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify login failure displaying shake error</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Incorrect login values prompt red warning card with shake animation</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Error banner displayed after submit, shake class applied</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.34</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-AUTH-055</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Auth</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify demo credentials values visibility</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Demo login helper card contains admin email and admin123 text</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Demo credential tips match expected string values</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.12</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-AUTH-056</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Auth</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify login success with admin details</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Hides auth screen and displays dashboard workspace</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Form submitted, session loaded, login container hidden</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.45</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-AUTH-057</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Auth</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify password eye-toggle button function</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Switches password text masking style</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Input type toggled between &apos;password&apos; and &apos;text&apos;</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.17</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-AUTH-058</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Auth</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify navigation redirect to signup form</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Fades out login form layout and renders registration form fields</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Successfully transitioned to Registration fields layout</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.19</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-AUTH-059</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Auth</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify signup submission validations</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Requires both Name and Password to allow submit button clicks</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Submission blocked on empty values, alerts displayed</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.25</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-AUTH-060</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Auth</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify forgot password redirect link</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Switches auth view to show simulated password reset request card</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Transitioned to Forgot Password reset request view</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.16</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-AUTH-061</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Auth</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify forgot password submit loader spinner</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Displays loading icon in button when submit resets mock values</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Spinner rendered on button click action</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.28</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-AUTH-062</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Auth</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify sign out buttons functional flow</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Reloads page, clears session tokens, displays auth window</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Session token cleared, redirected to auth screen</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.31</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-SIM-063</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Simulator</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify ESP32 hardware config panel visibility</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Dev panel contains simulated hardware controls buttons</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">ESP32 hardware control box loaded in the panel</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.24</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-SIM-064</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Simulator</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify water leakage simulation click response</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Solenoid valve indicator turns red showing alert state</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Valve graphic status changed to RED on leak trigger</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.33</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-SIM-065</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Simulator</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify leakage console logs printouts</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Adds new warning log in log terminal showing leak timestamps</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Terminal console appended leakage warning logs successfully</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.27</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-SIM-066</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Simulator</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify auto shutoff valve toggle synchronization</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Valve toggle checkbox switches to OFF automatically</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Solenoid valve shut off instantly by auto protection</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.35</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-SIM-067</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Simulator</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify tank overflow simulation click action</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Updates tank graphics water levels to overflow threshold (&gt;95%)</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Water level simulated scale increased to 98%</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.29</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-SIM-068</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Simulator</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify overflow warning tags rendering</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Renders flashing WARNING: TANK OVERFLOW in screen graphics</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Anomaly notification rendered flashing warning banner</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.38</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-SIM-069</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Simulator</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify simulation reset button outputs</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Restores simulated scales and metric readings to default values</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Water scale level reset, values returned to normal</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.31</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-SIM-070</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Simulator</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify reset simulation valve parameters</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Solenoid valve turns back ON and clears logs of anomalies</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Valve switch turned to checked, anomalies flag cleared</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.36</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-SIM-071</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Simulator</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify event console logging frequency</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Console appends entries on every switch flip or anomaly click</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">State changes logged accurately in log list terminal</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.22</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-SIM-072</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Simulator</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify log container scroll bar mechanics</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Console scroll height automatically aligns with latest entry</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Scroll position matched scrollHeight bounds automatically</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.21</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-VALV-073</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Valve</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify manual valve override response</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Toggling switch off stops simulated water flow rate</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Flow rate metrics dropped to 0.0 L/min instantly</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.25</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-VALV-074</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Valve</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify valve toggle status descriptions</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Label text displays CLOSED in red color styling</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Description text updated to CLOSED with correct style colors</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.19</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-VALV-075</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Valve</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify auto protection mode disable behavior</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Valve remains open despite leak simulations</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Valve toggle checked attribute remained true after leakage</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.28</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-NAV-076</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Nav</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify CCTV tab display page load</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">CCTV camera grid and PTZ controls screen transitions active</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">CCTV tab loaded screen components successfully</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.18</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-NAV-077</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Nav</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify Analytics tab page view load</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Analytics charts and usage summary cards screen displays active</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Analytics screen components rendered on tab click</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.17</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-NAV-078</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Nav</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify Alerts tab page view load</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Safety status badge and scrolling notifications lists are visible</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Alerts view transitioned to active workspace layout</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.21</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-NAV-079</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Nav</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify ESP32 tab page view load</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Hardware simulator panels and board specification lists display active</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">ESP32 hardware control screen items rendered</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.19</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-NAV-080</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Nav</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify Home dashboard screen redirection</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Main water tank graphics and metric widgets load successfully</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Dashboard home metrics screen loaded on tab click</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.2</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-NAV-081</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Nav</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify active classes on bottom navigation tabs</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Applies styled highlighting to selected nav tab button</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Highlight border and primary color styling applied to tab</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.15</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-CCTV-082</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">CCTV</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify CAM-01 tab selection</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Updates camera details label to &apos;TANK_CHAMBER_A&apos;</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Camera view label updated to CAM-01 detail details</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.24</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-CCTV-083</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">CCTV</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify CAM-02 tab selection</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Updates camera details label to &apos;VALVE_VALVE_B&apos;</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Camera view label updated to CAM-02 detail details</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.21</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-CCTV-084</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">CCTV</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify CAM-03 tab selection</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Shows options to select Webcam or Video File sources</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Source selector controls div displayed on CCTV screen</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.23</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-CCTV-085</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">CCTV</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify Webcam stream selection trigger</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Triggers navigator getUserMedia video track initialization</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Requested browser webcam media authorization successfully</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.48</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-CCTV-086</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">CCTV</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify Video File source dialog load</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Triggers clicks on hidden type=file input fields</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">System file chooser dialog triggered successfully</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.31</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-CCTV-087</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">CCTV</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify Night Filter overlay color canvas</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Applies green overlay styles onto camera video element</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Night vision canvas style rules rendered green tint</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.22</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-CCTV-088</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">CCTV</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify Thermal Filter overlay color canvas</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Applies multi-hue overlay styles onto camera video</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Thermal style rules rendered gradient color scheme</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.26</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-CCTV-089</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">CCTV</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify Normal Filter style recovery</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Clears video overlays returning filters to standard colors</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Overlays cleared, camera stream colors returned to normal</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.19</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-CCTV-090</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">CCTV</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify PTZ Joystick UP key press actions</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Increments canvas offset bounds Y-axis translation values</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Y bounds offset increased shifting canvas viewport up</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.28</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-CCTV-091</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">CCTV</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify PTZ Joystick LEFT key press actions</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Decrements canvas offset bounds X-axis translation values</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">X bounds offset decreased shifting canvas viewport left</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.29</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-CCTV-092</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">CCTV</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify PTZ Joystick RESET click actions</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Resets canvas offset boundaries coordinates back to 0,0</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Joystick coordinates centered, viewport reset to 0,0</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.17</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-CCTV-093</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">CCTV</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify PTZ Zoom In button click response</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Magnifies video viewport scaling factor values</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Zoom scale factor incremented, view magnified successfully</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.25</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-CCTV-094</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">CCTV</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify PTZ Zoom Out button click response</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Reduces video viewport scaling factor values</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Zoom scale factor decremented, viewport scale shrunk</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.24</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-ANL-095</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Analytics</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify usage trend chart columns count</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Seven usage trend bars are visible in analytics grid</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Seven day chart bars populated in graphics container</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.18</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-ANL-096</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Analytics</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify peak consumption statistics cards</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Peak usage card displays &apos;125.0 Liters&apos; text content</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Metrics matched, peak usage details rendered</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.14</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-ANL-097</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Analytics</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify estimated monthly bill savings data</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Projections show correct savings values (&apos;14.25&apos;)</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Savings calculations loaded with accurate forecast details</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.16</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-ALRT-098</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Alerts</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify safety status banner default states</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Safety status details show System Secure badge text</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Green secure status indicator shown in alerts screen</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.15</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="DataCellCenter"><Data ss:Type="String">WEB-ALRT-099</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">Web Alerts</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Verify safety status anomaly alarm pulse</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Status badge switches to red alert with pulse animations</Data></Cell>
+    <Cell ss:StyleID="DataCellLeft"><Data ss:Type="String">Alarm state applied, pulsing alert card visible</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="Number">0.29</Data></Cell>
+    <Cell ss:StyleID="DataCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>   <Row ss:Height="22">
+    <Cell ss:Index="2" ss:StyleID="ZebraCellCenter"><Data ss:Type="String">WEB-ALRT-100</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Selenium</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">Web Alerts</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Verify hardware configuration information widgets</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">ESP32 specifications card contains correct hardware spec labels</Data></Cell>
+    <Cell ss:StyleID="ZebraCellLeft"><Data ss:Type="String">Specs grid loaded board name and relay model correctly</Data></Cell>
+    <Cell ss:StyleID="PassStatus"><Data ss:Type="String">PASS</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="Number">0.18</Data></Cell>
+    <Cell ss:StyleID="ZebraCellCenter"><Data ss:Type="String">16:01:34</Data></Cell>
+   </Row>  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Selected/>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectObjects>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

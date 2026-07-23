@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="6dp">
+
+    <LinearLayout
+        android:id="@+id/ll_ai_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="start"
+        android:background="@drawable/chat_bubble_ai"
+        android:padding="12dp"
+        android:layout_marginEnd="60dp">
+
+        <TextView
+            android:id="@+id/tv_ai_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AI Message text"
+            android:textColor="#ffffff"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_user_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="end"
+        android:background="@drawable/chat_bubble_user"
+        android:padding="12dp"
+        android:layout_marginStart="60dp">
+
+        <TextView
+            android:id="@+id/tv_user_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Message text"
+            android:textColor="#ffffff"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+</LinearLayout>

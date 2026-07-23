@@ -1,0 +1,30 @@
+# Gradle files
+.gradle/
+**/build/
+local.properties
+
+# Android build outputs
+*.apk
+*.aar
+*.ap_
+
+# Expo / React Native / Node
+node_modules/
+.expo/
+
+# Log files
+*.log
+logcat_*.txt
+build_log.txt
+build_log_err.txt
+window_dump.xml
+
+# OS files
+Thumbs.db
+db.properties
+.DS_Store
+
+# IDEs
+.idea/
+*.iml
+.vscode/

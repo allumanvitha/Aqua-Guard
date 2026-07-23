@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Aqua Guard Automation Suite">
+    <listeners>
+        <listener class-name="selenium.utils.TestListener" />
+        <listener class-name="appium.utils.TestListener" />
+    </listeners>
+    
+    <test name="Selenium Web Admin Tests">
+        <classes>
+            <class name="selenium.tests.AuthSeleniumTests" />
+            <class name="selenium.tests.DashboardSeleniumTests" />
+            <class name="selenium.tests.DeviceAdminSeleniumTests" />
+            <class name="selenium.tests.ReportsSeleniumTests" />
+            <class name="selenium.tests.FirebaseConsoleSeleniumTests" />
+        </classes>
+    </test>
+
+    <test name="Appium Mobile Native Tests">
+        <classes>
+            <class name="appium.tests.AuthAppiumTests" />
+            <class name="appium.tests.DashboardAppiumTests" />
+            <class name="appium.tests.DeviceAppiumTests" />
+            <class name="appium.tests.MonitoringAppiumTests" />
+            <class name="appium.tests.SystemAppiumTests" />
+            <class name="appium.tests.PerformanceAppiumTests" />
+        </classes>
+    </test>
+</suite>
