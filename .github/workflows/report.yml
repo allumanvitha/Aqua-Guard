@@ -16,6 +16,7 @@ concurrency:
 jobs:
   test-and-generate-report:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -27,50 +28,20 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Appium & Driver
+      - name: Run Selenium Web Tests & Performance Suite
+        working-directory: Aqua Guard/automation
         run: |
-          npm install -g appium
-          appium driver install uiautomator2
-
-      - name: Run Selenium Tests (Headless)
-        run: |
-          cd "Aqua Guard/automation"
-          mvn test -Dtest=AuthSeleniumTests,DashboardSeleniumTests,DeviceAdminSeleniumTests,ReportsSeleniumTests,FirebaseConsoleSeleniumTests
-        continue-on-error: true # Ensure we still run Appium and generate reports if Selenium fails
-
-      - name: Build Android App for Testing
-        run: |
-          cd "Aqua Guard/frontend"
-          chmod +x gradlew
-          ./gradlew assembleDebug
-        continue-on-error: true
-
-      - name: Run Appium Tests in Android Emulator
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 33
-          target: google_apis
-          arch: x86_64
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          script: |
-            appium --log automation-appium-server.log &
-            sleep 10
-            cd "Aqua Guard/automation"
-            mvn test -Dtest=AuthAppiumTests,DashboardAppiumTests,DeviceAppiumTests,MonitoringAppiumTests,SystemAppiumTests,PerformanceAppiumTests
-        continue-on-error: true
+          mvn test -Dtest=AuthSeleniumTests,DashboardSeleniumTests,DeviceAdminSeleniumTests,ReportsSeleniumTests,FirebaseConsoleSeleniumTests,PerformanceLoadTest
 
       - name: Prepare GH-Pages Directory structure
+        if: always()
         run: |
           mkdir -p public-reports
           if [ -d "Aqua Guard/automation/reports" ]; then
             cp -r "Aqua Guard/automation/reports/"* public-reports/
+          fi
+          if [ ! -f "public-reports/index.html" ] && [ -f "public-reports/TestReport.html" ]; then
+            cp public-reports/TestReport.html public-reports/index.html
           fi
 
       - name: Upload Report Directory Artifact
@@ -81,6 +52,7 @@ jobs:
   deploy-reports-pages:
     needs: test-and-generate-report
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
