@@ -73,36 +73,7 @@ jobs:
             selenium_failed.txt
 
   appium-tests:
-    name: 📱 Appium — Android Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'maven'
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Appium
-        run: |
-          npm install -g appium
-          appium driver install uiautomator2
-
-      - name: Build Android APK
-        run: |
-          cd "Aqua Guard/frontend"
-          chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon || true
-
-      - name: Run Appium Tests in Emulator
+         - name: Run Appium Tests in Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 33
@@ -113,49 +84,10 @@ jobs:
           disable-animations: true
           script: |
             appium --log automation-appium-server-e2e.log &
+            APPIUM_PID=$!
             sleep 10
-            cd "Aqua Guard/automation"
-            mvn test -Dtest=Appium400TestSuite,MobileEndToEndAppiumTests,AuthAppiumTests,DashboardAppiumTests,DeviceAppiumTests,MonitoringAppiumTests,SystemAppiumTests,PerformanceAppiumTests -DfailIfNoTests=false || true
-
-      - name: Generate Summary
-        if: always()
-        run: |
-          TOTAL=0; FAILURES=0; ERRORS=0; SKIPPED=0
-          if [ -d "Aqua Guard/automation/target/surefire-reports" ]; then
-            for file in "Aqua Guard/automation/target/surefire-reports"/*.xml; do
-              if [ -f "$file" ]; then
-                t=$(grep -oP 'tests="\K[^"]+' "$file" | head -1) || t=0
-                f=$(grep -oP 'failures="\K[^"]+' "$file" | head -1) || f=0
-                e=$(grep -oP 'errors="\K[^"]+' "$file" | head -1) || e=0
-                s=$(grep -oP 'skipped="\K[^"]+' "$file" | head -1) || s=0
-                TOTAL=$((TOTAL + t)); FAILURES=$((FAILURES + f)); ERRORS=$((ERRORS + e)); SKIPPED=$((SKIPPED + s))
-              fi
-            done
-          fi
-          PASSED=$((TOTAL - FAILURES - ERRORS - SKIPPED))
-          
-          echo "## 📱 Appium — Android Tests" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Metric | Result |" >> $GITHUB_STEP_SUMMARY
-          echo "|---|---:|" >> $GITHUB_STEP_SUMMARY
-          echo "| Total Tests | $TOTAL |" >> $GITHUB_STEP_SUMMARY
-          echo "| Passed | $PASSED |" >> $GITHUB_STEP_SUMMARY
-          echo "| Failed | $((FAILURES + ERRORS)) |" >> $GITHUB_STEP_SUMMARY
-          
-          echo "$TOTAL" > appium_total.txt
-          echo "$PASSED" > appium_passed.txt
-          echo "$((FAILURES + ERRORS))" > appium_failed.txt
-
-      - name: Upload Report Artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: appium-reports
-          path: |
-            Aqua Guard/automation/target/surefire-reports/
-            appium_total.txt
-            appium_passed.txt
-            appium_failed.txt
+            mvn --file "Aqua Guard/automation/pom.xml" test -Dtest=Appium400TestSuite,MobileEndToEndAppiumTests,AuthAppiumTests,DashboardAppiumTests,DeviceAppiumTests,MonitoringAppiumTests,SystemAppiumTests,PerformanceAppiumTests -DfailIfNoTests=false || true
+            kill $APPIUM_PID || true
 
   unit-tests:
     name: 🧪 Unit Tests — API
